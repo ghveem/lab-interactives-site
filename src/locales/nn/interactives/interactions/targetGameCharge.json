@@ -1,0 +1,309 @@
+{
+  "title": "Target Game (Charge Magnitude / Force Relationship)",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Steer a charged particle to a target.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.32,
+  "fontScale": 0.65,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Set the charge and magnitude on two fixed particles to get a positively charged particle around obstacles to hit a target. ",
+    "View the electric field and the forces on the objects to draw conclusions about how they interact. ",
+    "Can you get the charged particle to hit the target?",
+    "***",
+    "*This simulation was adapted by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "level1",
+      "url": "models-converted/lab-version/1/md2d/interactions/target-game-charge-magnitude/targetGameCharge$0.json",
+      "importedFrom": "imports/legacy-mw-content/interactions/target-game-charge-magnitude/targetGameCharge$0.mml",
+      "onLoad": [
+        "setShapeProperties(3, {lineColor: 'rgb(255,0,0)', lineWeight: 7});",
+        "set('atomTraceColor','yellow');",
+        "var timePerTick = get('timePerTick'),",
+        "    collisionPadding = 0.075;",
+        "callEvery(timePerTick, function() {",
+        "  var target = getShapeProperties(2);",
+        "  if (atomsWithinRect(target.x, target.y, target.width, target.height).length > 0) {",
+        "    alert('Congratulations! You hit the target.');",
+        "    stop();",
+        "  }",
+        "  for (var i = 0; i < 6; i++) {",
+        "    target = getObstacleProperties(i);",
+        "    if (atomsWithinRect(target.x - collisionPadding, target.y - collisionPadding, target.width + 2*collisionPadding, target.height + 2*collisionPadding).length > 0) {",
+        "      if (get('error-triggered') == false) {",
+        "        alert('You hit a barrier. Try again.');",
+        "        set('error-triggered',true);",
+        "      }",
+        "      stop();",
+        "    }",
+        "  }",
+        "});",
+        "start();"
+      ],
+      "viewOptions": {
+        "controlButtons": "",
+        "enableKeyboardHandlers": false,
+        "electricFieldDensity": 24,
+        "electricFieldColor": "rgb(0,255,0)",
+        "forceVectors": {
+          "length": 30
+        }
+      }
+    },
+    {
+      "type": "md2d",
+      "id": "level2",
+      "url": "models-converted/lab-version/1/md2d/interactions/target-game-charge-magnitude/level2Charge$0.json",
+      "importedFrom": "imports/legacy-mw-content/interactions/target-game-charge-magnitude/level2Charge$0.mml",
+      "onLoad": [
+        "setShapeProperties(3, {lineColor: 'rgb(255,0,0)', lineWeight: 7});",
+        "set('atomTraceColor','yellow');",
+        "var timePerTick = get('timePerTick'),",
+        "    collisionPadding = 0.075;",
+        "callEvery(timePerTick, function() {",
+        "  var target = getShapeProperties(2);",
+        "  if (atomsWithinRect(target.x, target.y, target.width, target.height).length > 0) {",
+        "    alert('Congratulations! You hit the target.');",
+        "    stop();",
+        "  }",
+        "  for (var i = 0; i < 6; i++) {",
+        "    target = getObstacleProperties(i);",
+        "    if (atomsWithinRect(target.x - collisionPadding, target.y - collisionPadding, target.width + 2*collisionPadding, target.height + 2*collisionPadding).length > 0){",
+        "      if (get('error-triggered') == false) {",
+        "        alert('You hit a barrier. Try again.');",
+        "        set('error-triggered',true);",
+        "      }",
+        "      stop();",
+        "    }",
+        "  }",
+        "});",
+        "start();"
+      ],
+      "viewOptions": {
+        "controlButtons": "",
+        "electricFieldDensity": 24,
+        "electricFieldColor": "rgb(0,255,0)",
+        "forceVectors": {
+          "length": 30
+        }
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "object-b-charge",
+      "initialValue": 0,
+      "onChange": [
+        "setAtomProperties(1, {charge: value});"
+      ]
+    },
+    {
+      "name": "object-a-charge",
+      "initialValue": 0,
+      "onChange": [
+        "setAtomProperties(0, {charge: value});"
+      ]
+    },
+    {
+      "name": "error-triggered",
+      "initialValue": false
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "add-atom",
+      "type": "button",
+      "action": [
+        "if (getNumberOfAtoms() > 2) {",
+        "  untraceAtom(getNumberOfAtoms()-1);",
+        "  removeAtom(getNumberOfAtoms()-1);",
+        "}",
+        "addAtom( {x: getShapeProperties(0).x + getShapeProperties(0).width, y: get('height')/2, element: 1, vx: 0.0025, vy: 0, charge: 1});",
+        "start();",
+        "traceAtom( getNumberOfAtoms() - 1 );"
+      ],
+      "text": "Launch a positive particle",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "try-again",
+      "type": "button",
+      "action": [
+        "if (getNumberOfAtoms() > 2) {",
+        "  untraceAtom(getNumberOfAtoms()-1);",
+        "  removeAtom(getNumberOfAtoms()-1);",
+        "}"
+      ],
+      "text": "Try again",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "select-show-force-vectors",
+      "type": "checkbox",
+      "text": "Show force on objects",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "showForceVectors",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "select-show-electric-field",
+      "type": "checkbox",
+      "text": "Show electric field",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "showElectricField",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "select-level",
+      "type": "radio",
+      "style": "radio",
+      "orientation": "horizontal",
+      "label": "",
+      "labelOn": "top",
+      "options": [
+        {
+          "text": "Level 1",
+          "action": "loadModel('level1');",
+          "selected": true
+        },
+        {
+          "text": "Level 2",
+          "action": "loadModel('level2');"
+        }
+      ],
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "select-object-a-charge",
+      "type": "slider",
+      "min": -3,
+      "max": 3,
+      "steps": 6,
+      "title": "Set charge on object A",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "Neutral"
+        },
+        {
+          "value": -3,
+          "label": "-"
+        },
+        {
+          "value": 3,
+          "label": "+"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "displayValue": "return format('d')(value)",
+      "property": "object-a-charge",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "select-object-b-charge",
+      "type": "slider",
+      "min": -3,
+      "max": 3,
+      "steps": 6,
+      "title": "Set charge on object B",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "Neutral"
+        },
+        {
+          "value": -3,
+          "label": "-"
+        },
+        {
+          "value": 3,
+          "label": "+"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "displayValue": "return format('d')(value)",
+      "property": "object-b-charge",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "add-atom",
+        "try-again",
+        "select-level"
+      ],
+      [
+        "select-object-a-charge",
+        "select-object-b-charge"
+      ],
+      [
+        "select-show-electric-field",
+        "select-show-force-vectors"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "bottom",
+      "top": "model.bottom",
+      "width": "model.width",
+      "left": "model.left",
+      "align": "center"
+    }
+  ]
+}

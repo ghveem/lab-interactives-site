@@ -1,0 +1,127 @@
+{
+  "title": "Making and Breaking Bonds: The Effect of Temperature",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Explore how temperature affects chemical reactions.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.8,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "A chemical reaction can occur in three different ways:",
+    "",
+    "- A chemical bond is formed.",
+    "- A chemical bond is broken.",
+    "- One or more electrons are transferred between atoms or molecules.",
+    "",
+    "Explore reactions in which chemical bonds are formed and broken. Experiment with  heating and cooling the atoms to ",
+    "see how temperature affects the balance between bond formation and breaking.",
+    "***",
+    "*This simulation was adapted by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "making-breaking.json",
+      "url": "models/lab-version/1/md2d/interactions/dissociation-energy2.json",
+      "onLoad": [
+        "setBondEnergy('1-1',0.94);"
+      ],
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "keShading": true
+      },
+      "modelOptions": {
+        "temperatureControl": true,
+        "targetTemperature": 3000
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "ke-shading",
+      "type": "checkbox",
+      "text": "Kinetic energy shading",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "keShading",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "temperature-slider",
+      "type": "slider",
+      "min": 200,
+      "max": 11000,
+      "steps": 1100,
+      "title": "Temperature",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 200,
+          "label": "Low"
+        },
+        {
+          "value": 11000,
+          "label": "High"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "property": "targetTemperature",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "right": [
+      [
+        "temperature-slider"
+      ],
+      [
+        "ke-shading"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "above",
+      "bottom": "model.top",
+      "left": "model.left",
+      "width": "model.width",
+      "align": "center"
+    },
+    {
+      "id": "right",
+      "top": "model.top",
+      "left": "model.right",
+      "height": "model.height",
+      "align": "center"
+    }
+  ]
+}

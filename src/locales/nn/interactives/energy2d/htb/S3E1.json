@@ -1,0 +1,44 @@
+{
+  "title": "Conduction: Combine conductivity and heat capacity",
+  "publicationStatus": "draft",
+  "subtitle": "Which material provides the best insulation?",
+  "about": [
+    "The three bars have different combinations of thermal conductivity and heat capacity.",
+   	"Run the model and watch the changing temperatures in the graph. Which material resists heat flow the most? The least? Why?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S3E.html",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S3E1",
+      "url": "models/lab-version/1/energy2d/S3E1-mod.json",
+      "importedFrom": "imports/energy2d/models-xml/S3E1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2, T3",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": -2,
+      "ymax": 20,
+      "xmax": 900,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-1", "sensor-0", "sensor-2"
+      ]
+    }
+  ],
+  "layout": {
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

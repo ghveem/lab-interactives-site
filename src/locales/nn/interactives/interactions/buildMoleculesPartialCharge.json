@@ -1,0 +1,217 @@
+{
+  "title": "Making molecules",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Exploring polarization",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.35,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": [
+    "This interactive was created by the [Concord Consortium](https://concord.org/) using our [Next-Generation Molecular Workbench](http://mw.concord.org/nextgen/) software, with funding by a grant from [Google.org](https://www.google.org/).",
+    "This interactive also uses [JSMol](https://sourceforge.net/projects/jsmol/), licensed under the [LGPL](http://www.gnu.org/licenses/lgpl.html) license."
+  ],
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "What happens to the distribution of charge in a molecule when atoms within the molecule",
+    " are replaced with different ones? Choose different types of atoms to add to an existing",
+    " molecule and observe the changes in the electron distribution (charge distribution) of the",
+    " molecule when different atoms are substituted at various points on the molecule.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "model": {
+        "url": "https://models-resources.concord.org/jsmol/embeddable.html",
+        "molecule": "models/polarization/propane.mol"
+      },
+      "onLoad": [
+        "function updateView() {",
+        "  post('jsmolScript','surf = '+get('surface')+';');",
+        "  if (get('surface')) {",
+        "    post('jsmolScript', 'script models/polarization/create-isosurface.spt');",
+        "    updateOpacity();",
+        "  } else {",
+        "    post('jsmolScript', 'isosurface delete');",
+        "  }",
+        "}",
+        "function updateOpacity() {",
+        "  post('jsmolScript','transl = '+get('translucency')+';');",
+        "  if (get('translucency')) {",
+        "    post('jsmolScript', 'color isosurface opaque');",
+        "  } else {",
+        "    post('jsmolScript', 'color isosurface translucent');",
+        "  }",
+        "}",
+        "post('jsmolScript', 'script models/polarization/initialization.spt');",
+        "onPropertyChange('translucency', updateOpacity);",
+        "onPropertyChange('surface', updateView);"
+      ],
+      "viewOptions": {
+        "aspectRatio": 1,
+        "controlButtons": ""
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "translucency",
+      "initialValue": false
+    },
+    {
+      "name": "surface",
+      "initialValue": false
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "label1",
+      "type": "text",
+      "text": "**Click on an atom of the molecule to change it to:**",
+      "width": "auto",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "atom-type",
+      "type": "radio",
+      "style": "radio",
+      "orientation": "vertical",
+      "label": "",
+      "labelOn": "top",
+      "options": [
+        {
+          "text": "oxygen",
+          "action": "post('jsmolScript', 'set picking assignAtom_O;');"
+        },
+        {
+          "text": "fluorine",
+          "action": "post('jsmolScript', 'set picking assignAtom_F;');"
+        },
+        {
+          "text": "nitrogen",
+          "action": "post('jsmolScript', 'set picking assignAtom_N;');"
+        },
+        {
+          "text": "carbon",
+          "action": "post('jsmolScript', 'set picking assignAtom_C;');"
+        },
+        {
+          "text": "hydrogen",
+          "action": "post('jsmolScript', 'set picking assignAtom_H;');"
+        }
+      ],
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "label2",
+      "type": "text",
+      "text": "**Set surface features:**",
+      "width": "auto",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "charge-surface",
+      "type": "checkbox",
+      "text": "show charge coloring on molecule surface",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "surface",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "surface-translucent",
+      "type": "checkbox",
+      "text": "make molecule surface opaque",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "translucency",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "reset",
+      "type": "button",
+      "action": "reloadInteractive();",
+      "text": "reset",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "right-top": [
+      [
+        "label1"
+      ],
+      [
+        "atom-type"
+      ]
+    ],
+    "right-bottom": [
+      [
+        "label2"
+      ],
+      [
+        "charge-surface"
+      ],
+      [
+        "surface-translucent"
+      ],
+      [
+        "reset"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "right-top",
+      "left": "model.right",
+      "width": "15em",
+      "padding-left": "0.5em"
+    },
+    {
+      "id": "right-bottom",
+      "left": "model.right",
+      "top": "right-top.bottom",
+      "width": "15em",
+      "padding-left": "0.5em",
+      "padding-top": "0.5em"
+    }
+  ]
+}

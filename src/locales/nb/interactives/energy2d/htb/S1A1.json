@@ -1,0 +1,113 @@
+{
+  "title": "Measuring heat transfer",
+  "publicationStatus": "public",
+  "subtitle": "Why does a warm object feel warm when you touch it?",
+  "about": [
+    "The model shows two contacting objects that have identical mass (*m*)",
+    "and specific heat (*c*p) but different initial temperatures.",
+    "Run the model and note the temperatures measured by the two thermometers.",
+    "Adjust each starting temperature with the sliders.",
+    "Can you predict the final temperature?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S1A.html",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S1A1",
+      "url": "models-converted/lab-version/1/energy2d/S1A1.json",
+      "importedFrom": "imports/energy2d/models-xml/S1A1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "left-block",
+      "label": "Left block temperature",
+      "unitAbbreviation": "C",
+      "onChange": "getPart(0).temperature = value;",
+      "initialValue": 10
+    },
+    {
+      "name": "right-block",
+      "label": "Right block temperature",
+      "unitAbbreviation": "C",
+      "onChange": "getPart(1).temperature = value;",
+      "initialValue": 40
+    }
+  ],
+  "components": [
+    {
+      "type": "slider",
+      "id": "left-block-slider",
+      "property": "left-block",
+      "title": "Left block",
+      "min": 0,
+      "max": 50,
+      "displayValue": "return format('.1f')(value)",
+      "labels": [
+        {
+          "value": 0,
+          "label": "0.0°C"
+        },
+        {
+          "value": 50,
+          "label": "50.0°C"
+        }
+      ],
+      "steps": 50,
+      "width": "10em"
+    },
+    {
+      "type": "slider",
+      "id": "right-block-slider",
+      "property": "right-block",
+      "title": "Right block",
+      "min": 0,
+      "max": 50,
+      "displayValue": "return format('.1f')(value)",
+      "labels": [
+        {
+          "value": 0,
+          "label": "0.0°C"
+        },
+        {
+          "value": 50,
+          "label": "50.0°C"
+        }
+      ],
+      "steps": 50,
+      "width": "10em"
+    },
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": 0,
+      "ymax": 50,
+      "xmax": 300,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-1", "sensor-0"
+      ],
+      "legendLabels": [
+      	"T1",
+      	"T2"
+      ],
+      "legendVisible": true
+    }
+  ],
+  "layout": {
+    "bottom": [
+      "left-block-slider", "right-block-slider"
+    ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

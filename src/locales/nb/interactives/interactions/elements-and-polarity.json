@@ -1,0 +1,247 @@
+{
+  "title": "Elements and Polarity",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "How polarity affects molecular shape and charge.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.2,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Select from different polar molecules such as water, propanol, mineral oil, and phospholipids. ",
+    "View these molecules and their shape in different ways to determine how different atom types lead ",
+    "to areas of different charge on the overall molecular surface.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+    ],
+  "theme": [
+    "invisible-disabled-components"
+  ],
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "model": {
+        "url": "https://models-resources.concord.org/jsmol/embeddable.html"
+      },
+      "onLoad": [
+        "post('jsmolScript', 'set background black;');"
+      ],
+      "viewOptions": {
+        "aspectRatio": 1.8,
+        "controlButtons": ""
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "isosurfaceGenerated",
+      "initialValue": false
+    },
+    {
+      "name": "moleculeAndView",
+      "initialValue": "models/elements-and-polarity/water.mol; translate Z -60%;",
+      "onChange": [
+        "post('jsmolScript', 'load ' + value + '; rotate BEST;');",
+        "set('isosurfaceGenerated', false);",
+        "set('atomView', get('atomView'));",
+        "set('surfaceView', get('surfaceView'));",
+        "set('labels', get('labels'));"
+      ]
+    },
+    {
+      "name": "atomView",
+      "initialValue": "ball-and-stick",
+      "onChange": [
+        "var script;",
+        "if (value === 'ball-and-stick') {",
+        "  script = 'wireframe 0.15; cpk 20%;';",
+        "} else if (value === 'spacefill') {",
+        "  script = 'spacefill 90%;';",
+        "}",
+        "post('jsmolScript', script);"
+      ]
+    },
+    {
+      "name": "surfaceView",
+      "initialValue": "none",
+      "onChange": [
+        "var script = '';",
+        "if (value === 'none') {",
+        "  script += ' isosurface off; set echo off;';",
+        "}",
+        "if (!get('isosurfaceGenerated') && (value === 'isosurface-opaque' || value === 'isosurface-transparent')) {",
+        "  script += 'set echo bottom center; font ECHO 20 SansSerif; color ECHO orange; echo \"Generating surface...\"; refresh;';",
+        "  script += 'isosurface molecular color range -0.25 0.25 colorscheme rwb map mep;';",
+        "  script += 'set echo off;';",
+        "}",
+        "if (value === 'isosurface-opaque') {",
+        "  script += ' isosurface on; isosurface opaque;';",
+        "  script += 'set echo bottom left; set echo IMAGE \"models/elements-and-polarity/surface-key.png\"';",
+        "}",
+        "if (value === 'isosurface-transparent') {",
+        "  script += ' isosurface on; isosurface translucent;';",
+        "  script += 'set echo bottom left; set echo IMAGE \"models/elements-and-polarity/surface-key.png\"';",
+        "}",
+        "post('jsmolScript', script);"
+      ]
+    },
+    {
+      "name": "labels",
+      "initialValue": false,
+      "onChange": [
+        "post('jsmolScript', value ? 'label %e; set labelOffset 0 0; color labels green; font labels 15;' : 'labels off;');"
+      ]
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "mol",
+      "type": "pulldown",
+      "label": "Molecule",
+      "labelOn": "left",
+      "options": [
+        {
+          "text": "Water",
+          "value": "models/elements-and-polarity/water.mol; translate Z -60%;"
+        },
+        {
+          "text": "Ammonia",
+          "value": "models/elements-and-polarity/ammonia.mol; translate Z -60%;"
+        },
+        {
+          "text": "Cholesterol",
+          "value": "models/elements-and-polarity/cholesterol.mol;"
+        },
+        {
+          "text": "Methylamine",
+          "value": "models/elements-and-polarity/methylamine.mol; translate Z -50%;"
+        },
+        {
+          "text": "Mineral Oil",
+          "value": "models/elements-and-polarity/mineral-oil.mol"
+        },
+        {
+          "text": "Phospholipid",
+          "value": "models/elements-and-polarity/phospholipid2.mol"
+        },
+        {
+          "text": "Propanol",
+          "value": "models/elements-and-polarity/propanol.mol; translate Z -20%;"
+        },
+        {
+          "text": "Stearic acid (used in soap)",
+          "value": "models/elements-and-polarity/stearic-acid.mol"
+        }
+      ],
+      "property": "moleculeAndView",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "atom-view",
+      "type": "radio",
+      "style": "radio",
+      "orientation": "horizontal",
+      "label": "Atom view",
+      "labelOn": "left",
+      "options": [
+        {
+          "text": "Ball and stick ",
+          "value": "ball-and-stick"
+        },
+        {
+          "text": "Spacefill",
+          "value": "spacefill"
+        }
+      ],
+      "property": "atomView",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "surface-view",
+      "type": "radio",
+      "style": "radio",
+      "orientation": "horizontal",
+      "label": "Surface view",
+      "labelOn": "left",
+      "options": [
+        {
+          "text": "None",
+          "value": "none"
+        },
+        {
+          "text": "Opaque",
+          "value": "isosurface-opaque"
+        },
+        {
+          "text": "Transparent",
+          "value": "isosurface-transparent"
+        }
+      ],
+      "property": "surfaceView",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "labels",
+      "type": "checkbox",
+      "text": "Label atoms",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "labels",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "mol",
+        "labels"
+      ],
+      [
+        "atom-view"
+      ],
+      [
+        "surface-view"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "bottom",
+      "top": "model.bottom",
+      "left": "model.left",
+      "width": "interactive.width"
+    }
+  ]
+}

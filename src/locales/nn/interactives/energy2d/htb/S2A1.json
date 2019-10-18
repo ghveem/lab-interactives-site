@@ -1,0 +1,128 @@
+{
+  "title": "Maintaining steady temperature",
+  "publicationStatus": "public",
+  "subtitle": "Why does the temperature in one box change more dramatically than the temperature in the other?",
+   "about": [
+    "Two closed boxes have identical heaters. The left-hand box has a much lower specific heat capacity",
+    "than the right-hand box. Run the model and monitor the temperatures on the graph.",
+    "When the **left-hand side box** (T1) reaches 4°C, turn off the power. Try to keep the",
+    "temperature in the **left-hand side box** beteween 3°C and 4°C by turning the power on and off.",
+    "Compare the shapes of the two temperature curves. Which was steadier and which was more variable?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S2A.html",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S2A1",
+      "url": "models-converted/lab-version/1/energy2d/S2A1.json",
+      "importedFrom": "imports/energy2d/models-xml/S2A1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "power",
+      "label": "power",
+      "onChange": [
+        "if (value) {",
+        "  getPart(2).power = 5000;",
+        "  getPart(3).power = 5000;",
+        "} else {",
+        "  getPart(2).power = 0;",
+        "  getPart(3).power = 0;",
+        "};"
+      ],
+      "initialValue": true
+    },
+    {
+      "name": "left-specific-heat",
+      "label": "Specific heat left: ",
+      "value": "getPart(1).specific_heat;",
+      "onChange": "getPart(0).specific_heat = value;",
+      "initialValue": 200
+    },
+    {
+      "name": "right-specific-heat",
+      "label": "right: ",
+      "value": "getPart(0).specific_heat;",
+      "onChange": "getPart(1).specific_heat = value;",
+      "initialValue": 5000
+    }
+  ],
+  "components": [
+    {
+      "type": "button",
+      "id": "start-model",
+      "text": "Start model",
+      "action": [
+        "if (isStopped()) {",
+        "  start();",
+        "}"
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "power-switch",
+      "label": "Power switch",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "power",
+      "options": [
+        {
+          "text": "On",
+          "value": true
+        },
+        {
+          "text": "Off",
+          "value": false
+        }
+      ]
+    },
+    {
+      "type": "numericOutput",
+      "id": "left-specific-heat-output",
+      "property": "left-specific-heat",
+      "orientation": "horizontal",
+      "displayValue": "return format('.1f')(value)"
+    },
+    {
+      "type": "numericOutput",
+      "id": "right-specific-heat-output",
+      "property": "right-specific-heat",
+      "orientation": "horizontal",
+      "displayValue": "return format('.1f')(value)"
+    },
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": -1,
+      "ymax": 10,
+      "xmax": 400,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-1", "sensor-0"
+      ],
+      "legendLabels": [
+      "T1",
+      "T2"
+      ],
+      "legendVisible": true
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [ "power-switch", "start-model" ],
+      [ "left-specific-heat-output", "right-specific-heat-output" ]
+    ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

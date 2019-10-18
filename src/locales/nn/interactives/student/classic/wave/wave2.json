@@ -1,0 +1,24 @@
+{
+  "title": "wave2",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "wave2$0",
+      "url": "models-converted/lab-version/1/md2d/student/classic/wave/wave2$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

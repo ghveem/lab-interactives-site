@@ -1,0 +1,155 @@
+{
+  "title": "Table: Soil Moisture",
+  "publicationStatus": "draft",
+  "labEnvironment": "production",
+  "subtitle": "",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": "1.864",
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "helpOnLoad": false,
+  "about": [
+    "Use this table to collect data about soil moisture"
+  ],
+  "theme": "",
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "empty",
+      "model": {
+        "url": ""
+      },
+      "viewOptions": {
+        "aspectRatio": 2000,
+        "controlButtons": "",
+        "showClock": false
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [
+    {
+      "name": "table-dataset",
+      "properties": [
+        "index",
+        "______Description of Location______",
+        "Soil Moisture"
+      ],
+      "serializableProperties": "all",
+      "streamDataFromModel": true,
+      "clearOnModelReset": true,
+      "initialData": {
+        "index": [1,2,3,4,5,6,7,8,9],
+        "______Description of Location______": [],
+        "Soil Moisture": []
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "table1",
+      "type": "table",
+      "title": null,
+      "dataSet": "table-dataset",
+      "addNewRows": true,
+      "visibleRows": 4,
+      "showBlankRow": false,
+      "indexColumn": false,
+      "propertyColumns": [
+        {
+          "name": "index",
+          "format": "r",
+          "editable": false
+        },
+        {
+          "name": "______Description of Location______",
+          "format": "r"
+        },
+        {
+          "name": "Soil Moisture",
+          "format": "r"
+        }
+      ],
+      "headerData": [
+        {
+          "name": "index"
+        },
+        {
+          "name": "______Description of Location______"
+        },
+        {
+          "name": "Soil Moisture"
+        }
+      ],
+      "width": "100%",
+      "height": "11em",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "graph",
+      "type": "graph",
+      "dataSet": "table-dataset",
+      "ymin": 0,
+      "ymax": 100,
+      "xmin": 0,
+      "xmax": 9.9,
+      "xTickCount": 10,
+      "yTickCount": 5,
+      "xFormatter": "d",
+      "yFormatter": ".2s",
+      "ylabel": "Soil Moisture",
+      "xlabel": "index",
+      "lines": false,
+      "bars": true,
+      "lineWidth": 16,
+      "enableAutoScaleButton": false,
+      "enableAxisScaling": false,
+      "autoScaleX": false,
+      "autoScaleY": false,
+      "legendLabels": [],
+      "legendVisible": false,
+      "xProperty": [
+        "index"
+      ],
+      "properties": [
+        "Soil Moisture"
+      ],
+      "width": "35em",
+      "height": "15em"
+    }
+  ],
+  "layout": {
+    "above": [
+      "table1"
+    ],
+    "below": [
+      "graph"
+    ]
+  },
+  "template": [
+    {
+      "id": "above",
+      "top": "model.bottom",
+      "padding-top": "0em",
+      "bottom": "below.top",
+      "padding-bottom": "3em",
+      "padding-right": "0.5em",
+      "width": "interactive.width",
+      "align": "center"
+    },
+    {
+      "id": "below",
+      "width": "interactive.width",
+      "align": "center",
+      "bottom": "interactive.bottom"
+    }
+  ]
+}

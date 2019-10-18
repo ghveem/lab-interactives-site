@@ -1,0 +1,212 @@
+{
+  "title": "Water 8",
+  "publicationStatus": "public",
+  "subtitle": "Well Placement Around a Gaining Stream",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Explore the best place to put wells around a gaining stream to maintain the water level",
+    "in the stream.",
+    "",
+    "Click the **Add well** button, and then move your cursor to where you want to drill a well.",
+    "Place your cursor at the land surface, and click to start drilling.",
+    "Click and hold until the well reaches the proper depth.",
+    "",
+    "Run two experiments:",
+    "",
+    "(1) Place wells near the stream.",
+    "",
+    "(2) Place wells far from the stream.",
+    "",
+    "The upper graph (**Water Level**) shows the water level in the stream.",
+    "The lower graph (**Well Output**) shows the the water output of the different wells.",
+    "Although you can add up to five wells, you should add only two wells in each experiment."
+    ],
+ "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+              "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+              "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+              "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."],
+  "theme": ["has", "graph-title-bg", "standalone-playback"],
+  "aspectRatio": 1.3,
+  "fontScale": 0.8,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "url": "models/lab-version/1/iframe-model/iframe-model.json",
+      "modelOptions":{
+        "url": "//models-resources.concord.org/agentscript/water/lab-embeddable.html#xMax=120&xMin=-90",
+        "template": "state/low-res/WaterModel-Gaining-Losing-Stream-StreamC.json",
+        "rainProbability": 1,
+        "evapProbability": 0,
+        "rainCountOptions":  {
+          "x": 18,
+          "y": 5,
+          "dx": 32,
+          "dy": 22,
+          "debug": false
+        },
+        "controls": {
+          "wells": "removal",
+          "remove": "well"
+        }
+      },
+      "viewOptions": {
+        "aspectRatio": 1.6,
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+      ]
+    }
+  ],
+  "parameters": [
+  ],
+  "outputs": [
+    {
+      "name": "year",
+      "value": "return iframeOutput('month') / 12;"
+    },
+    {
+      "name": "rainCount",
+      "value": "return iframeOutput('rainCount') || 720"
+    },
+    {
+      "name": "well1",
+      "value": "return iframeOutput('well1') || 0"
+    },
+    {
+      "name": "well2",
+      "value": "return iframeOutput('well2') || 0"
+    },
+    {
+      "name": "well3",
+      "value": "return iframeOutput('well3') || 0"
+    },
+    {
+      "name": "well4",
+      "value": "return iframeOutput('well4') || 0"
+    },
+    {
+      "name": "well5",
+      "value": "return iframeOutput('well5') || 0"
+    }
+  ],
+  "helpTips": [
+  ],
+  "components": [
+    {
+      "id": "water-level-graph",
+      "type": "graph",
+      "properties": [
+        "rainCount"
+      ],
+      "enableZooming": false,
+      "enableAxisScaling": false,
+      "xProperty": "year",
+      "title": "Water Level",
+      "titlePosition": "left",
+      "buttonsLayout": "horizontal",
+      "buttonsStyle": "text",
+      "width": "100%",
+      "height": "100%",
+      "xlabel": "Time (years)",
+      "xmin": 0,
+      "xmax": 10,
+      "ylabel": "Water Level",
+      "ymin": 0,
+      "ymax": 1200,
+      "xTickCount": 6,
+      "yTickCount": 6,
+      "xFormatter": "d",
+      "yFormatter": ".2r",
+      "dataColors": [
+        "#0000ff"
+      ],
+      "syncXAxis": "wells-graph"
+    },
+    {
+      "id": "wells-graph",
+      "type": "graph",
+      "properties": [
+        "well1",
+        "well2",
+        "well3",
+        "well4",
+        "well5"
+      ],
+      "enableZooming": false,
+      "enableAxisScaling": false,
+      "xProperty": "year",
+      "title": "Well Output",
+      "titlePosition": "left",
+      "buttonsLayout": "horizontal",
+      "buttonsStyle": "text",
+      "width": "100%",
+      "height": "100%",
+      "xlabel": "Time (years)",
+      "xmin": 0,
+      "xmax": 10,
+      "ylabel": "Well output",
+      "ymin": 0,
+      "ymax": 600,
+      "xTickCount": 6,
+      "yTickCount": 6,
+      "xFormatter": "d",
+      "yFormatter": ".2r",
+      "dataColors": [
+        "#0000FF",
+        "#FF0066",
+        "#000000",
+        "#CC33FF",
+        "#FF6600"
+      ],
+      "legendLabels": [
+        "Well 1",
+        "Well 2",
+        "Well 3",
+        "Well 4",
+        "Well 5"
+      ],
+      "syncXAxis": "water-level-graph"
+    },
+    {
+      "id": "playback",
+      "type": "playback"
+    }
+  ],
+  "template": [
+    {
+      "id": "playback-container",
+      "top": "model.bottom",
+      "left": "model.left",
+      "margin": "0.5em"
+    },
+    {
+      "id": "right-top",
+      "top": "model.top",
+      "left": "model.right",
+      "width": "model.width * 0.5",
+      "height": "model.width * 0.5",
+      "margin": "0 0.3em"
+    },
+    {
+      "id": "right-bottom",
+      "top": "right-top.bottom",
+      "left": "model.right",
+      "width": "model.width * 0.5",
+      "height": "model.width * 0.5",
+      "margin": "0.3em"
+    }
+  ],
+  "layout": {
+    "playback-container": [
+      "playback"
+    ],
+    "right-top": [
+      "water-level-graph"
+    ],
+    "right-bottom": [
+      "wells-graph"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "recshockwave",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "recshockwave",
+      "url": "models-converted/lab-version/1/md2d/student/materials/recshockwave.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Convection: Forced convection",
+  "publicationStatus": "public",
+  "subtitle": "How does blowing air cool down an object?",
+  "about": [
+    "The upper chamber has a fan; the lower chamber does not. Run the model and note the temperatures measured by the two thermometers.",
+    "Try different wind speeds. How does the wind speed affect the temperature?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S4C.html",
+  "aspectRatio": 1.5,
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S4C1",
+      "url": "models-converted/lab-version/1/energy2d/S4C1.json",
+      "importedFrom": "imports/energy2d/models-xml/S4C1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "onLoad": "callAt(1500, function() { stop(); });"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "wind-speed",
+      "label": "Wind speed:",
+      "value": "getPart(0).wind_speed;",
+      "onChange": "getPart(0).wind_speed = value;",
+      "initialValue": 0.025
+    }
+  ],
+  "components": [
+    {
+      "type": "radio",
+      "id": "pick-wind-speed",
+      "label": "Wind speed:",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "wind-speed",
+      "options": [
+        {
+          "text": "Low",
+          "value": 0.01
+        },
+        {
+          "text": "Medium",
+          "value": 0.025
+        },
+        {
+          "text": "High",
+          "value": 0.05
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1 and T2",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": 0,
+      "ymax": 35,
+      "xmax": 1800,
+      "xTickCount": 5,
+      "xFormatter": ".2r",
+      "yFormatter": ".2r",
+      "xProperty": "time",
+      "properties": [
+        "sensor-0", "sensor-1"
+      ]
+    }
+  ],
+  "layout": {
+    "bottom": [ "pick-wind-speed" ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

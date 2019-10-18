@@ -1,0 +1,101 @@
+{
+  "title": "ITSI: Oxygen Gas Prediction",
+  "publicationStatus": "draft",
+  "subtitle": "Draw a prediction.",
+  "about": "",
+  "aspectRatio": "1.75",
+  "fontscale": 0.9,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "empty",
+      "model": {
+        "url": ""
+      },
+      "viewOptions": {
+        "aspectRatio": 1000,
+        "viewPortWidth": 0,
+        "viewPortHeight": 0,
+        "controlButtons": "",
+        "showClock": false
+      }
+    }
+  ],
+  "dataSets": [
+    {
+      "name": "prediction-dataset",
+      "properties": [
+        "predictionTime",
+        "prediction"
+      ],
+      "streamDataFromModel": false,
+      "clearOnModelReset": false,
+      "initialData": {
+        "predictionTime": [],
+        "prediction": []
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "predictionGraph",
+      "dataSet": "prediction-dataset",
+      "title": "",
+      "xlabel": "Time (s)",
+      "ylabel": "Oxygen Gas (%)",
+      "ymin":   0,
+      "ymax": 100,
+      "xmin":   0,
+      "xmax":  30,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "properties": [
+        "prediction"
+      ],
+      "xProperty": [
+        "predictionTime"
+      ],
+      "enableSelectionButton": false,
+      "enableDrawButton": true,
+      "resetAxesOnReset": false,
+      "dataColors": [
+        "#a00000",
+        "#2ca000",
+        "#2c00a0"
+      ]
+    },
+    {
+      "type": "button",
+      "id": "clear-button",
+      "text": "Clear",
+      "tooltip": "Clear the prediction.",
+      "action": [
+        "clearDataSet('prediction-dataset');"
+      ]
+    }
+  ],
+  "template": [
+    {
+      "id": "above",
+      "top": "model.bottom",
+      "padding-top": "0em",
+      "bottom": "below.top",
+      "padding-bottom": "2.5em",
+      "width": "interactive.width",
+      "padding-right": "1em"
+    },
+    {
+      "id": "below",
+      "width": "interactive.width",
+      "height": "2em",
+      "align": "center",
+      "bottom": "interactive.bottom"
+    }
+  ],
+  "layout": {
+    "above": ["predictionGraph"],
+    "below": ["clear-button"]
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "title": "Protein Folding",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "How do peptides fold into stable conformations?",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.35,
+  "fontScale": 0.95,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Generate all polar, all nonpolar, or random proteins and observe how the protein folds in response to these molecular ",
+    "properties. Explore how the potential energy of the system changes over time to draw conclusions about how proteins ",
+    "develop stable structures.",
+    "***",
+    "*This simulation was adapted by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "amino-acids$0",
+      "url": "models/lab-version/1/md2d/interactions/protein-folding/model.json",
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "controlButtonStyle": "text",
+        "showClock": false,
+        "images": [
+          {
+            "imageUri": "polarity-key.png",
+            "imageX": 4.9,
+            "imageY": 2.95,
+            "scale": 0.28
+          }
+        ]
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "solvent",
+      "initialValue": "water",
+      "onChange": "setSolvent(value);"
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "random-protein-button",
+      "type": "button",
+      "action": "reloadModel(); generateRandomProtein(40);",
+      "text": "Generate new random protein",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "mostly-phobic-button",
+      "type": "button",
+      "action": [
+        "reloadModel();",
+        "batch(function () {",
+        "  generateRandomProtein(40);",
+        "  var phobicAA = [5,9,12,14,15,17,18,19,22,23,24];",
+        "  var philicAA = [6,7,8,10,11,13,16,20,21];",
+        "  var phobic, philic;",
+        "  for (var i = 0; i < getNumberOfAtoms(); i++) {",
+        "    phobic = phobicAA[Math.round(Math.random()*(phobicAA.length-1))];",
+        "    philic = philicAA[Math.round(Math.random()*(philicAA.length-1))];",
+        "    setAtomProperties(i, {element: (Math.random() > 0.2 ? phobic : philic) }, false, false);",
+        "  }",
+        "});"
+      ],
+      "text": "Generate mostly non-polar protein",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "mostly-philic-button",
+      "type": "button",
+      "action": [
+        "reloadModel();",
+        "batch(function () {",
+        "  generateRandomProtein(40);",
+        "  var phobicAA = [5,9,12,14,15,17,18,19,22,23,24];",
+        "  var philicAA = [6,7,8,10,11,13,16,20,21];",
+        "  var phobic, philic;",
+        "  for (var i = 0; i < getNumberOfAtoms(); i++) {",
+        "    phobic = phobicAA[Math.round(Math.random()*(phobicAA.length-1))];",
+        "    philic = philicAA[Math.round(Math.random()*(philicAA.length-1))];",
+        "    setAtomProperties(i, {element: (Math.random() < 0.2 ? phobic : philic) }, false, false);",
+        "  }",
+        "});"
+      ],
+      "text": "Generate mostly polar protein",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "random-protein-button"
+      ],
+      [
+        "mostly-phobic-button",
+        "mostly-philic-button"
+      ]
+    ]
+  },
+  "template": "simple"
+}

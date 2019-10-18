@@ -1,0 +1,24 @@
+{
+  "title": "daintywalker",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "daintywalker$0",
+      "url": "models-converted/lab-version/1/md2d/student/classic/motion/daintywalker$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

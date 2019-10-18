@@ -1,0 +1,159 @@
+{
+  "title": "Land of Bump - Particles with Temperature Setting",
+  "publicationStatus": "draft",
+  "subtitle": "How do particles move at different temperatures?",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.0,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "helpOnLoad": false,
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 0,
+  "about": [
+  "You are looking into the particles that make up everything in the world. These particles are always in motion.\n\n", 
+  "Look carefully to see how they move. Change temperatures by clicking the Cold, Medium, and Hot buttons, and describe how the motion of the particles changes.\n\n", 
+  "Check \"Mark a Particle\" to highlight a particle to make it easier to follow."
+  ],
+  "models": [
+    {
+      "type": "md2d",
+      "id": "empty-atom",
+      "url": "models/lab-version/1/md2d/sensing-science/land-of-bump/screen3-set-temp.json",
+      "onLoad": [
+        "var movingAtoms = [];",
+        "for (var i = 0; i < getNumberOfAtoms(); i++) {",
+        "  if (getAtomProperties(i).element == 0) {",
+        "    movingAtoms.push(i) };",
+        "}",
+        "set('movingAtomsIndices', movingAtoms);",
+        "start();",
+        "set('targetTemperature', 850);"
+      ],
+      "viewOptions": {
+        "controlButtons": "",
+        "viewPortX": 0.3,
+        "viewPortY": 3.8,
+        "viewPortWidth": 6.4,
+        "viewPortHeight": 6.4
+      }
+    }
+  ],
+    "parameters": [
+    {
+      "name": "movingAtomsIndices",
+      "initialValue": []
+    },
+    {
+      "name": "randomIndexValue",
+      "initialValue": 0
+    },
+    {
+      "name": "highlight-random-particle",
+      "initialValue": false,
+      "retainProperty": true,
+      "onChange": [
+        "if (value) {",
+        "  var randomIndex = Math.floor(Math.random() * 27) + 61;",
+        "  markAtoms( [randomIndex] );",
+        "} else {",
+          "unmarkAllAtoms();",
+        "}"
+        ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "temperature-red",
+      "unitAbbreviation": "K",
+      "label": "speed",
+      "value": "return getTemperatureOfAtoms(get('movingAtomsIndices'));"
+    }
+  ],
+  "filteredOutputs": [
+    {
+      "name": "display-temp-red",
+      "property": "temperature-red",
+      "unitAbbreviation": "°K",
+      "period": 2000
+    }
+  ],
+  "components": [
+   {
+      "type": "barGraph",
+      "id": "bar-graph-reds",
+      "min": 0,
+      "max": 5000,
+      "title": "Temperature of Particles",
+      "property": "display-temp-red",
+      "labels": [
+        {
+          "value": 1,
+          "label": "Cold"
+        },
+        {
+          "value": 2500,
+          "label": "Medium"
+        },
+        {
+          "value": 5000,
+          "label": "Hot"
+        }
+      ]      
+    },
+    {
+      "type": "button",
+      "id": "cold-button",
+      "text": "Cold",
+      "action": "set('targetTemperature', 50);"
+    },
+    {
+      "type": "button",
+      "id": "medium-button",
+      "text": "Medium",
+      "action": "set('targetTemperature', 850);"
+    },
+    {
+      "type": "button",
+      "id": "hot-button",
+      "text": "Hot",
+      "action": "set('targetTemperature', 1500);"
+    },    
+    {
+      "type": "checkbox",
+      "id": "particle-mark",
+      "text": "Mark a Particle",
+      "property": "highlight-random-particle"
+    }
+  ],
+  "layout": 
+  {
+    "right-side": [ "bar-graph-reds"],
+    "below-model": ["cold-button", "medium-button", "hot-button"],
+    "below-below": ["particle-mark" ]
+  },
+    "template": [
+    {
+      "id": "below-model",
+      "top": "model.bottom",
+      "left": "model.left"
+    },
+    {
+      "id": "below-below",
+      "top": "below-model.bottom",
+      "left": "model.left",
+      "height": "2em",
+      "padding-left": "1em"
+    },
+    {
+      "id": "right-side",
+      "top": "model.top",
+      "bottom": "model.bottom",
+      "left": "model.right"
+    }
+  ]
+}

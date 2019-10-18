@@ -1,0 +1,24 @@
+{
+  "title": "ring150_broken",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "ring150_broken",
+      "url": "models-converted/lab-version/1/md2d/student/fluid/ring150_broken.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

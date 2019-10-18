@@ -1,0 +1,94 @@
+{
+  "title": "Convection: Blowing wind",
+  "publicationStatus": "public",
+  "subtitle": "Why should you close the windows on a stormy winter day?",
+   "about": [
+    "There is a heater on the floor of the house and windows that can be opened and closed. The walls can also be moved.",
+    "Run the model, change the wind conditions, open and close the windows, and move the walls.",
+    "Note the convection patterns in each situation. Air currents are indicated by arrows."
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S4E.html",
+  "aspectRatio": 1.0,
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S4E1",
+      "url": "models-converted/lab-version/1/energy2d/S4E1.json",
+      "importedFrom": "imports/energy2d/models-xml/S4E1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+        "getPart(8).y = 3.95;",
+        "getPart(9).y = 3.95;"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "wind-speed",
+      "label": "Wind speed:",
+      "value": "getPart(0).wind_speed;",
+      "onChange": "getPart(0).wind_speed = value;",
+      "initialValue": 0.05
+    },
+    {
+      "name": "window-closed",
+      "label": "Windows",
+      "onChange": [
+        "if (value) {",
+        "  getPart(8).y = 3.95;",
+        "  getPart(9).y = 3.95;",
+        "} else {",
+        "  getPart(8).y = 2.8;",
+        "  getPart(9).y = 2.8;",
+        "};"
+      ],
+      "initialValue": true
+    }
+  ],
+  "components": [
+    {
+      "type": "radio",
+      "id": "pick-wind-speed",
+      "label": "Wind speed:",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "wind-speed",
+      "options": [
+        {
+          "text": "wind",
+          "value": 0.05
+        },
+        {
+          "text": "No wind",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "open-close-window",
+      "label": "Windows:",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "window-closed",
+      "options": [
+        {
+          "text": "Closed",
+          "value": true
+        },
+        {
+          "text": "Open",
+          "value": false
+        }
+      ]
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [ "pick-wind-speed" ],
+      [ "open-close-window" ]
+    ]
+  }
+}

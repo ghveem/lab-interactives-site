@@ -1,0 +1,96 @@
+{
+  "title": "Heat and Temperature 5: Changing Temperature",
+  "publicationStatus": "public",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "largesolid",
+      "url": "models-converted/lab-version/1/md2d/itsi/heattransfer/largesolid.json",
+      "importedFrom": "imports/legacy-mw-content/itsi/heattransfer/largesolid.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "modelOptions": {
+        "temperatureControl": false
+      }
+    },
+    {
+      "type": "md2d",
+      "id": "smallsolid",
+      "url": "models-converted/lab-version/1/md2d/itsi/heattransfer/smallsolid.json",
+      "importedFrom": "imports/legacy-mw-content/itsi/heattransfer/smallsolid.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "modelOptions": {
+        "temperatureControl": false
+      }
+    }
+  ],
+   "filteredOutputs": [
+    {
+      "name": "temperatureSmoothed",
+      "unitType": "temperature",
+      "property": "temperature",
+      "type": "RunningAverage",
+      "period": 2500
+    }
+    ],
+    "parameters": [
+      {
+        "name": "temperatureIncrement",
+        "initialValue": 5.0
+      },
+      {
+        "name": "modelChoice",
+        "initialValue": "largeModel"
+      }
+    ],
+  "components": [
+    {
+      "type": "radio",
+      "id": "select-model-buttons",
+      "orientation": "horizontal",
+      "options": [
+        {
+          "text": "Large solid",
+          "action": "loadModel( 'largesolid');",
+          "selected": true
+        },
+        {
+          "text": "Small solid (half size)",
+          "action": "loadModel( 'smallsolid');"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "id": "add-energy",
+      "text": "Add energy",
+      "action": [
+      "start();",
+        "addKEToAtoms(1);"
+      ]
+    },
+    {
+      "type": "barGraph",
+      "id": "thermometer",
+      "property": "temperatureSmoothed",
+      "units": true,
+      "labelFormat": "3r",
+      "min": 0,
+      "max": 800
+    }
+  ],
+  "layout": {
+    "bottom": [
+      "add-energy",
+      "select-model-buttons"
+    ],
+    "right": [
+      "thermometer"
+    ]
+  }
+}

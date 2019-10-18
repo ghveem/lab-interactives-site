@@ -1,0 +1,24 @@
+{
+  "title": "Where is the most heat lost?",
+  "publicationStatus": "draft",
+  "subtitle": "Use the temperature difference across walls to find the ones most poorly insulated.",
+  "about": [
+    "This house may have multiple locations that are poorly insulated. Drag the thermometers around to examine the temperatures.",
+   	"Try to find the locations that are losing energy. Which elements have lower insulating values?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S7B.html",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S7B1",
+      "url": "models-converted/lab-version/1/energy2d/S6B1.json",
+      "importedFrom": "imports/energy2d/models-xml/S6B1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ]
+}

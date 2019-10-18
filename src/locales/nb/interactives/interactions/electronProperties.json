@@ -1,0 +1,479 @@
+{
+  "title": "Exploring Electron Properties",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Compare cathode ray particles and charged atoms.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.1167,
+  "fontScale": 0.85,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": true,
+  "aboutOnLoad": false,
+  "about": [
+    "J.J. Thomson discovered electrons by studying cathode rays, which were actually streams of electrons. ",
+    "Compare the behavior of charged atoms and cathode ray particles (electrons) by sending electrons or different ",
+    "atoms through charged plates. Watch what happens and consider why Thomson thought cathode ray particles could ",
+    "not be some type of charged atom.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "electronProperties$0",
+      "url": "models-converted/lab-version/1/md2d/interactions/exploring-electrons/electronProperties$0.json",
+      "importedFrom": "imports/legacy-mw-content/interactions/exploring-electrons/electronProperties$0.mml",
+      "onLoad": [
+        "var radius = getElementProperties(2).radius,",
+        "    xMax = get('viewPortWidth') + get('viewPortX') + radius,",
+        "    yMin = get('viewPortY') - radius,",
+        "    yMax = yMin + get('viewPortHeight') + radius,",
+        "    eFieldProps = getShapeProperties(0),",
+        "    plateThickness = 0.2;",
+        "removeTextBox(0);",
+        "removeTextBox(0);",
+        "addShape({",
+        "  type: 'rectangle',",
+        "  x: eFieldProps.x,",
+        "  y: eFieldProps.y,",
+        "  width: eFieldProps.width,",
+        "  height: plateThickness,",
+        "  color: '#f00',",
+        "  lineColor: '#aaa'",
+        "});",
+        "addShape({",
+        "  type: 'rectangle',",
+        "  x: eFieldProps.x,",
+        "  y: eFieldProps.y + eFieldProps.height - plateThickness,",
+        "  width: eFieldProps.width,",
+        "  height: plateThickness,",
+        "  color: '#00f',",
+        "  lineColor: '#aaa'",
+        "});",
+        "setElectricFieldProperties({orientation: 'S'});",
+        "onPropertyChange('time',function(time){",
+        "  var props = getAtomProperties(0);",
+        "  if (props.x > xMax || props.y > yMax || props.y < yMin) {",
+        "    stop();",
+        "  }",
+        "});",
+        "set('plateChargeProxy',8);"
+      ],
+      "viewOptions": {
+        "controlButtons": "",
+        "enableKeyboardHandlers": false,
+        "images": [
+          {
+            "imageUri": "plate_pos.png",
+            "imageHostIndex": 0,
+            "imageHostType": "",
+            "imageLayer": 1,
+            "imageLayerPosition": 1,
+            "imageX": 1,
+            "imageY": 2
+          },
+          {
+            "imageUri": "plate_neg.png",
+            "imageHostIndex": 0,
+            "imageHostType": "",
+            "imageLayer": 1,
+            "imageLayerPosition": 1,
+            "imageX": 1,
+            "imageY": 2
+          }
+        ]
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "mysteryMass",
+      "initialValue": 7,
+      "onChange": "setElementProperties(2,{mass: value});"
+    },
+    {
+      "name": "particleY",
+      "initialValue": 1.92,
+      "onChange": []
+    },
+    {
+      "name": "plateWidth",
+      "initialValue": 2.15
+    },
+    {
+      "name": "plateCenterX",
+      "initialValue": 3.875
+    },
+    {
+      "name": "upperPlateY",
+      "initialValue": 2.88
+    },
+    {
+      "name": "lowerPlateY",
+      "initialValue": 2.88
+    },
+    {
+      "name": "plateHeight",
+      "initialValue": 0.2
+    },
+    {
+      "name": "isSlowMotionEnabled",
+      "initialValue": false,
+      "onChange": "set('timeStep', value ? 0.1 : 1);"
+    },
+    {
+      "name": "superChargePlates",
+      "initialValue": false,
+      "onChange": [
+        "set('plateChargeProxy', get('plateChargeProxy'));"
+      ]
+    },
+    {
+      "name": "plateChargeProxy",
+      "initialValue": 8,
+      "onChange": [
+        "var mag = Math.abs(value),",
+        "    s = 192-Math.round((mag/10.0)*128),",
+        "    x = 192,",
+        "    blue = 'rgb(' + s + ',' + s + ',' + x + ')',",
+        "    red  = 'rgb(' + x + ',' + s + ',' + s + ')',",
+        "    white = 'rgb(192,192,192)',",
+        "    shapePropsTop    = getShapeProperties(3),",
+        "    shapePropsBottom = getShapeProperties(2),",
+        "    negText = '',",
+        "    posText = '',",
+        "    plateStrengthScale = get('superChargePlates') ? 1 : 0.001,",
+        "    plateStrengthDividend = 10000000,",
+        "    imageYoffset;",
+        "if (!shapePropsTop.type) return;",
+        "if (plateStrengthScale < 1) {",
+        "  setImageProperties(1,{imageUri: 'plate_neg_weak.png'});",
+        "  setImageProperties(0,{imageUri: 'plate_pos_weak.png'});",
+        "  imageYoffset = 0.01;",
+        "  var plHeight = get('plateHeight') * 0.7;",
+        "  var plWidth = get('plateWidth') * 0.7;",
+        "  shapePropsTop.y = get('upperPlateY') + get('plateHeight') * 0.3;",
+        "  shapePropsTop.height = plHeight;",
+        "  shapePropsTop.x = get('plateCenterX') - plWidth * 0.5;",
+        "  shapePropsTop.width = plWidth;",
+        "  shapePropsBottom.height = plHeight;",
+        "  shapePropsBottom.x = get('plateCenterX') - plWidth * 0.5;",
+        "  shapePropsBottom.width = plWidth;",
+        "} else {",
+        "  setImageProperties(1,{imageUri: 'plate_neg.png'});",
+        "  setImageProperties(0,{imageUri: 'plate_pos.png'});",
+        "  imageYoffset = 0;",
+        "  shapePropsTop.y = get('upperPlateY'),",
+        "  shapePropsTop.height = get('plateHeight'),",
+        "  shapePropsTop.x = get('plateCenterX') - get('plateWidth')/2,",
+        "  shapePropsTop.width = get('plateWidth')",
+        "  shapePropsBottom.height = get('plateHeight'),",
+        "  shapePropsBottom.x = get('plateCenterX') - get('plateWidth')/2,",
+        "  shapePropsBottom.width = get('plateWidth')",
+        "}",
+        "setShapeProperties(3,shapePropsTop);",
+        "setShapeProperties(2,shapePropsBottom);",
+        "if (value < 0) {",
+        "  setImageProperties(1,{imageY: shapePropsTop.y + shapePropsTop.height - 0.02 + imageYoffset, imageX: shapePropsTop.x + 0.05});",
+        "  setImageProperties(0,{imageY: shapePropsBottom.y + shapePropsBottom.height, imageX: shapePropsBottom.x + 0.05});",
+        "  setShapeProperties(2,{color: blue});",
+        "  setShapeProperties(3,{color: red});",
+        "  setElectricFieldProperties(0,{intensity: mag/plateStrengthDividend*plateStrengthScale, orientation: 'N'});",
+        "} else if (value > 0) {",
+        "  setImageProperties(0,{imageY: shapePropsTop.y + shapePropsTop.height - 0.02 + imageYoffset, imageX: shapePropsTop.x + 0.05});",
+        "  setImageProperties(1,{imageY: shapePropsBottom.y + shapePropsBottom.height, imageX: shapePropsBottom.x + 0.05});",
+        "  setShapeProperties(2,{color: red});",
+        "  setShapeProperties(3,{color: blue});",
+        "  setElectricFieldProperties(0,{intensity: mag/plateStrengthDividend*plateStrengthScale, orientation: 'S'});",
+        "} else {",
+        "  setImageProperties(0,{imageY: 10});",
+        "  setImageProperties(1,{imageY: 10});",
+        "  setElectricFieldProperties(0,{intensity: mag/plateStrengthDividend*plateStrengthScale, orientation: 'N'});",
+        "  setShapeProperties(2,{color: white});",
+        "  setShapeProperties(3,{color: white});",
+        "}"
+      ]
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [
+    {
+      "component": "",
+      "text": [
+        "Compare the behavior of cathode ray particles with the behavior of charged atoms",
+        "as they pass through an electric field generated by charged plates."
+      ],
+      "showcase": true
+    },
+    {
+      "component": "enable-super-plates",
+      "text": [
+        "Note: If you don't see the charged plates having an effect, try making the charge really high."
+      ],
+      "showcase": true
+    }
+  ],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "send-pos-particle",
+      "type": "button",
+      "action": [
+        "if (getNumberOfAtoms()>0) {",
+        "  untraceAtom(0);",
+        "  removeAtom(0);",
+        "}",
+        "addAtom({element: 2, x: 0.5, y: get('particleY'), vx: 0.001, vy: 0, charge: 1});",
+        "start();",
+        "traceAtom(0);"
+      ],
+      "text": "Send pos.(+) atom",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "send-neg-particle",
+      "type": "button",
+      "action": [
+        "if (getNumberOfAtoms()>0) {",
+        "  untraceAtom(0);",
+        "  removeAtom(0);",
+        "}",
+        "addAtom({element: 2, x: 0.5, y: get('particleY'), vx: 0.001, vy: 0, charge: -1});",
+        "start();",
+        "traceAtom(0);"
+      ],
+      "text": "Send neg.(-) atom",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "send-mystery-particle",
+      "type": "button",
+      "action": [
+        "if (getNumberOfAtoms()>0) {",
+        "  untraceAtom(0);",
+        "  removeAtom(0);",
+        "}",
+        "addAtom({element: 0, x: 0.5, y: get('particleY'), vx: 0.001, vy: 0, charge: -1});",
+        "start();",
+        "traceAtom(0);"
+      ],
+      "text": "Send cathode ray particle",
+      "width": "",
+      "height": "100%",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "set-atom-mass",
+      "type": "slider",
+      "min": 1,
+      "max": 12,
+      "steps": 11,
+      "title": "Atom mass (amu):",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 1,
+          "label": "Hydrogen"
+        },
+        {
+          "value": 7,
+          "label": "Lithium"
+        },
+        {
+          "value": 12,
+          "label": "Carbon"
+        }
+      ],
+      "width": "80%",
+      "height": "auto",
+      "displayValue": "return format('f')(value)",
+      "property": "mysteryMass",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "crookes-particle",
+      "type": "text",
+      "text": "**Particles from a Crookes tube**",
+      "width": "auto",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "charged-particle",
+      "type": "text",
+      "text": "**Charged atoms**",
+      "width": "auto",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "space",
+      "type": "text",
+      "text": "  ",
+      "width": "auto",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "space2",
+      "type": "text",
+      "text": "       ",
+      "width": "28%",
+      "height": "auto",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "enable-slow-motion",
+      "type": "checkbox",
+      "text": "Slow motion",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "isSlowMotionEnabled",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "set-charge-on-plates",
+      "type": "slider",
+      "min": -20,
+      "max": 20,
+      "steps": 20,
+      "title": "Charge on plates:",
+      "titlePosition": "left",
+      "labels": [
+        {
+          "value": -20,
+          "label": "Very high +/-"
+        },
+        {
+          "value": 20,
+          "label": "Very high -/+"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ],
+      "width": "100%",
+      "height": "auto",
+      "property": "plateChargeProxy",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "enable-super-plates",
+      "type": "checkbox",
+      "text": "Increase charge on plates 1000x",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "superChargePlates",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "set-charge-on-plates"
+      ],
+      [
+        "enable-super-plates",
+        "enable-slow-motion"
+      ]
+    ],
+    "left": [
+      [
+        "crookes-particle"
+      ],
+      [
+        "space"
+      ],
+      [
+        "send-mystery-particle"
+      ]
+    ],
+    "right": [
+      [
+        "space2",
+        "charged-particle"
+      ],
+      [
+        "set-atom-mass"
+      ],
+      [
+        "send-neg-particle",
+        "send-pos-particle"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "left",
+      "top": "model.bottom",
+      "border": "1px solid gray",
+      "padding-left": "2em",
+      "padding-bottom": "3.3em",
+      "padding-top": "1.3em",
+      "padding-right": "2em",
+      "margin-top": "1em",
+      "margin-bottom": "1.1em",
+      "background": "#fff"
+    },
+    {
+      "id": "right",
+      "top": "model.bottom",
+      "left": "left.right*1.03",
+      "border": "1px solid gray",
+      "padding": "1em",
+      "padding-right": "1em",
+      "padding-left": "2em",
+      "margin-top": "1em",
+      "margin-bottom": "1em",
+      "background": "#fff"
+    },
+    {
+      "id": "bottom",
+      "top": "left.bottom",
+      "padding-left": "7em"
+    }
+  ]
+}

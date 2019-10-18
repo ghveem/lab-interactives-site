@@ -1,0 +1,23 @@
+{
+  "title": "addBlocking",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "addBlocking",
+      "url": "models-converted/lab-version/1/md2d/public/part1/elisa/addBlocking.json",
+      "importedFrom": "imports/legacy-mw-content/public/part1/elisa/addBlocking.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

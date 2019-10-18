@@ -1,0 +1,24 @@
+{
+  "title": "nocrack",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "nocrack",
+      "url": "models-converted/lab-version/1/md2d/student/materials/nocrack.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

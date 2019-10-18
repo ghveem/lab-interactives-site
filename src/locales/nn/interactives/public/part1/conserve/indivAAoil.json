@@ -1,0 +1,23 @@
+{
+  "title": "indivAAoil",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "indivAAoil",
+      "url": "models-converted/lab-version/1/md2d/public/part1/conserve/indivAAoil.json",
+      "importedFrom": "imports/legacy-mw-content/public/part1/conserve/indivAAoil.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

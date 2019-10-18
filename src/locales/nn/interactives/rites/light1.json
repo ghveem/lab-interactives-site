@@ -1,0 +1,23 @@
+{
+  "title": "light1",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "light1$0",
+      "url": "models-converted/lab-version/1/md2d/rites/light1$0.json",
+      "importedFrom": "imports/legacy-mw-content/rites/light1$0.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

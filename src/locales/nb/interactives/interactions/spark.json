@@ -1,0 +1,210 @@
+{
+  "title": "Van de Graaff (VDG) discharge",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Explore electric potential energy and sparks.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.35,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": true,
+  "aboutOnLoad": false,
+  "about": [
+    "Charge up the Van de Graaff generator and drag the discharge wand close enough to form a spark. ",
+    "What happens to the electric potential energy when you charge the Van de Graaff and when the spark occurs?",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "spark",
+      "url": "models/lab-version/1/md2d/interactions/spark/spark.json",
+      "onLoad": [
+        "start();",
+        "var pinned = 1,",
+        "    dSq = Math.pow(getAtomProperties(1).x - getAtomProperties(0).x, 2) + Math.pow(getAtomProperties(1).y - getAtomProperties(0).y, 2),",
+        "    imageTicks = [-1,-1,-1,-1,-1],",
+        "    electronPath = [0,0];",
+        "for (var i = 1; i < 23; i++) { ",
+        "  electronPath.push(i*-0.02); electronPath.push(i*-0.02);",
+        "}",
+        "for (var i = 1; i < 25; i++) { ",
+        "  electronPath.push(-0.44); electronPath.push(-0.44 + (i*-0.02));",
+        "}",
+        "for (var i = 1; i < 23; i++) { ",
+        "  electronPath.push(-0.44 + (i*-0.005)); electronPath.push(-0.92 + (i*-0.02));",
+        "}",
+        "for (var i = 1; i < 35; i++) { ",
+        "  electronPath.push(-0.55 + (i*-0.012)); electronPath.push(-1.36 + (i*-0.02));",
+        "}",
+        "onDrag('atom', function (x, y, d, i) {",
+        "  if(i === 1){",
+        "    pinned = 0;",
+        "  }",
+        "  dSq = Math.pow(getAtomProperties(1).x - getAtomProperties(0).x, 2) + Math.pow(getAtomProperties(1).y - getAtomProperties(0).y, 2);",
+        "});",
+        "onPropertyChange('time', function(time) {",
+        "  setAtomProperties(1, {pinned: pinned});",
+        "  pinned = 1;",
+        "  ",
+        "  var wandAtoms = atomsWithinCircle(getAtomProperties(1).x, getAtomProperties(1).y, 0.15, 0),",
+        "      numVDGAtoms  = atomsWithinCircle(getAtomProperties(0).x, getAtomProperties(0).y, 0.25, 0).length,",
+        "      delta, i, ii, electron, nextAvailableImage;",
+        "  delta = numVDGAtoms == 0 ? 0 : dSq * (0.75 + numVDGAtoms/4)",
+        "  set('fake_pe', numVDGAtoms + delta);",
+        "  for (i = 0, ii = wandAtoms.length; i <  ii; i++) {",
+        "    electron = getAtomProperties(wandAtoms[i]);",
+        "    removeAtom(wandAtoms[i], {silent: true});",
+        "    nextAvailableImage = imageTicks.indexOf(-1);",
+        "    setImageProperties(nextAvailableImage+1, {visible: true});",
+        "    imageTicks[nextAvailableImage] = 0;",
+        "  }",
+        "  ",
+        "  for (i = 0, ii = imageTicks.length; i <  ii; i++) {",
+        "    if (imageTicks[i] > -1 && imageTicks[i]*2 < electronPath.length) {",
+        "      setImageProperties(i+1, {imageX: getAtomProperties(1).x + electronPath[imageTicks[i]*2] - 0.13, imageY: getAtomProperties(1).y + electronPath[imageTicks[i]*2 + 1] + 0.13});",
+        "      if (imageTicks[i]*2 < electronPath.length) {",
+        "        imageTicks[i]++;",
+        "      }",
+        "    } else {",
+        "      imageTicks[i] = -1;",
+        "    }",
+        "  }",
+        "});"
+      ],
+      "viewOptions": {
+        "controlButtons": "reset",
+        "enableKeyboardHandlers": false,
+        "imageMapping": {
+          "Wand.png": "Wand.svg",
+          "electron.png": "electron.svg"
+        }
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "left-particle-charge",
+      "initialValue": 2,
+      "onChange": ";"
+    },
+    {
+      "name": "right-particle-charge",
+      "initialValue": -2,
+      "onChange": ";"
+    },
+    {
+      "name": "fake_pe",
+      "initialValue": 0
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [
+    {
+      "component": "",
+      "text": [
+        "Charge up the Van de Graaff generator, and then drag the wand around by the head of the wand."
+      ],
+      "showcase": true
+    }
+  ],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "add-charge",
+      "type": "button",
+      "action": [
+        "var numAtoms = atomsWithinCircle(getAtomProperties(0).x, getAtomProperties(0).y, 0.3).length,",
+        "    added = false,",
+        "    count = 0,",
+        "    angle, x, y;",
+        "if (numAtoms >= 6) return;",
+        "while (!added && count++ < 10) {",
+        " angle = Math.random() * 360;",
+        " x = getAtomProperties(0).x + Math.sin(angle) * 0.23;",
+        " y = getAtomProperties(0).y + Math.cos(angle) * 0.23;",
+        " added = addAtom({x: x, y: y, charge: -1, friction: 0.7, element: 0, draggableWhenStopped: 0});",
+        "}"
+      ],
+      "text": "Add negative charge to the VDG",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "potential-energy-graph",
+      "type": "barGraph",
+      "property": "fake_pe",
+      "min": 0,
+      "max": 10,
+      "title": "Potential Energy",
+      "titleOn": "right",
+      "labels": [
+        {
+          "value": 10,
+          "label": "high"
+        },
+        {
+          "value": 0,
+          "label": "low"
+        }
+      ],
+      "units": false,
+      "gridLines": 10,
+      "labelFormat": "0.1f",
+      "barWidth": "2em",
+      "height": "100%",
+      "barColor": "#4c952f",
+      "fillColor": "#fff",
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "add-charge"
+      ]
+    ],
+    "right": [
+      [
+        "potential-energy-graph"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "bottom",
+      "left": "model.left",
+      "top": "model.bottom",
+      "width": "model.width",
+      "align": "center",
+      "padding-top": "1em"
+    },
+    {
+      "id": "right",
+      "top": "model.top",
+      "left": "model.right",
+      "bottom": "interactive.bottom",
+      "padding-left": "1em",
+      "padding-right": "1em"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Constructing a Larger Number of Water Molecules",
+  "publicationStatus": "draft",
+  "aspectRatio": 1.725,
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "constructing-a-larger-number-of-water-molecules$0",
+      "url": "models-converted/lab-version/1/md2d/itsi/stoichiometry/constructing-a-larger-number-of-water-molecules$0.json",
+      "importedFrom": "imports/legacy-mw-content/itsi/stoichiometry/constructing-a-larger-number-of-water-molecules$0.mml",
+      "viewOptions": {
+        "controlButtons": ""
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

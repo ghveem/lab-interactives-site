@@ -1,0 +1,23 @@
+{
+  "title": "heatingCurve3$1",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "heatingCurve3$1",
+      "url": "models-converted/lab-version/1/md2d/rites/heatingCurve3$1.json",
+      "importedFrom": "imports/legacy-mw-content/rites/heatingCurve3$1.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}
