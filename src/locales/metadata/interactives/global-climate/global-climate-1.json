@@ -1,4 +1,6 @@
 {
   "en-US": "interactives/global-climate/global-climate-1.json",
-  "es": "locales/es/interactives/global-climate/global-climate-1.json"
+  "es": "locales/es/interactives/global-climate/global-climate-1.json",
+  "nb-NO": "locales/nb/interactives/global-climate/global-climate-1.json",
+  "nn-NO": "locales/nn/interactives/global-climate/global-climate-1.json"
 }

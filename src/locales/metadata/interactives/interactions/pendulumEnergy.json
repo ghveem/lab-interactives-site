@@ -1,4 +1,6 @@
 {
   "en-US": "interactives/interactions/pendulumEnergy.json",
-  "el": "locales/el/interactives/interactions/pendulumEnergy.json"
+  "el": "locales/el/interactives/interactions/pendulumEnergy.json",
+  "nb-NO": "locales/nb/interactives/pendulumEnergy.json",
+  "nn-NO": "locales/nn/interactives/pendulumEnergy.json"
 }
