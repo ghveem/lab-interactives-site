@@ -1,0 +1,234 @@
+{
+  "title": "Model integration time step, period, and sample rate",
+  "publicationStatus": "public",
+  "subtitle": "Model parameters controlling the integration time step, period, and sample rate can be customized.",
+  "about": [
+    "Try to change timeStep, timeStepsPerTick or modelSampleRate and observe changes in the speed of simulation execution.",
+    "",
+    "See **[simulation-stepping](../../readme.html#md2d-simulation-stepping)** in readme for more details."
+  ],
+  "fontScale": 0.8,
+  "aspectRatio": 1.1,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "simple-gas$0",
+      "url": "models-converted/lab-version/1/md2d/new-examples-for-nextgen/simple-gas$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset_step",
+        "modelTimeLabel": true
+      }
+    },
+    {
+      "type": "md2d",
+      "id": "multiatomic-gas$0",
+      "url": "models-converted/lab-version/1/md2d/new-examples-for-nextgen/multiatomic-gas$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset_step",
+        "modelTimeLabel": true
+      }
+    },
+    {
+      "type": "md2d",
+      "id": "pendulum1$0",
+      "url": "models-converted/lab-version/1/md2d/new-examples-for-nextgen/pendulum1$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset_step",
+        "modelTimeLabel": true
+      }
+    },
+    {
+      "type": "md2d",
+      "id": "plasticforcesimple$0",
+      "url": "models-converted/lab-version/1/md2d/new-examples-for-nextgen/plasticforcesimple$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset_step",
+        "modelTimeLabel": true
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "pulldown",
+      "id": "select-model",
+      "options": [
+        {
+          "text": "Select a model",
+          "disabled": true
+        },
+        {
+          "text": "Monatomic Gas",
+          "action": "loadModel('simple-gas$0');"
+        },
+        {
+          "text": "Multiatomic Gas",
+          "action": "loadModel('multiatomic-gas$0');"
+        },
+        {
+          "text": "Pendulum",
+          "action": "loadModel('pendulum1$0');"
+        },
+        {
+          "text": "Plastic Forces",
+          "action": "loadModel('plasticforcesimple$0');"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "id": "calc-fps",
+      "text": "Get FPS",
+      "action": [
+        "start();",
+        "setTimeout(function() {",
+        "stop();",
+        "var startTime = getTime();",
+        "setTimeout(function() {",
+        "start();",
+        "setTimeout(function() {",
+        "stop();",
+        "var time = getTime() - startTime;",
+        "alert( (format('.2f')(time / (get('timeStepsPerTick') * get('timeStep')) / 2)) + ' fps');",
+        "}, 2000);",
+        "}, 100);",
+        "}, 2000);"
+      ]
+    },
+    {
+      "type": "slider",
+      "id": "timestep-slider",
+      "min": 0.01,
+      "max": 5,
+      "displayValue": "return format('.2f')(value)",
+      "labels": [
+        {
+          "value": 0.01,
+          "label": "0.01"
+        },
+        {
+          "value": 5.0,
+          "label": "5.0"
+        }
+      ],
+      "steps": 500,
+      "title": "timeStep",
+      "property": "timeStep"
+    },
+    {
+      "type": "slider",
+      "id": "refreshrate-slider",
+      "min": 1,
+      "max": 150,
+      "displayValue": "return value;",
+      "labels": [
+        {
+          "value": 1,
+          "label": "1"
+        },
+        {
+          "value": 150,
+          "label": "150"
+        }
+      ],
+      "steps": 149,
+      "title": "timeStepsPerTick",
+      "property": "timeStepsPerTick"
+    },
+    {
+      "type": "pulldown",
+      "id": "select-model-sample-rate",
+      "options": [
+        {
+          "text": "Model Sample Rate (Hz) ...",
+          "disabled": true
+        },
+        {
+          "text": "10",
+          "action": "set({ 'modelSampleRate' : 10 });"
+        },
+        {
+          "text": "15",
+          "action": "set({ 'modelSampleRate' : 15 });"
+        },
+        {
+          "text": "20",
+          "action": "set({ 'modelSampleRate' : 20 });"
+        },
+        {
+          "text": "30",
+          "action": "set({ 'modelSampleRate' : 30 });"
+        },
+        {
+          "text": "default (requestAnimationFrame)",
+          "selected": true,
+          "action": "set({ 'modelSampleRate' : 'default' });"
+        },
+        {
+          "text": "120",
+          "action": "set({ 'modelSampleRate' : 120 });"
+        }
+      ]
+    },
+    {
+      "type": "pulldown",
+      "id": "use-duration-pulldown",
+      "property": "useDuration",
+      "label": "useDuration",
+      "options": [
+        {
+          "text": "true",
+          "value": true
+        },
+        {
+          "text": "false",
+          "value": false
+        },
+        {
+          "text": "codap",
+          "value": "codap"
+        }
+      ]
+    },
+    {
+      "type": "slider",
+      "id": "requested-duration-slider",
+      "min": 1000,
+      "max": 20000,
+      "displayValue": "return value === null ? 'null' : format('.0f')(value);",
+      "labels": [
+        {
+          "value": 1000,
+          "label": "1000"
+        },
+        {
+          "value": 20000,
+          "label": "20000"
+        }
+      ],
+      "steps": 19,
+      "title": "requestedDuration",
+      "property": "requestedDuration"
+    },
+    {
+      "type": "button",
+      "id": "requested-duration-reset-button",
+      "text": "Reset requestedDuration",
+      "action": "set('requestedDuration', null);"
+    },
+    {
+      "type": "numericOutput",
+      "id": "actual-duration-output",
+      "property": "actualDuration",
+      "label": "actualDuration",
+      "orientation": "vertical",
+      "displayValue": "return value === Infinity ? 'Infinity' : format('.0f')(value);"
+    }
+  ],
+  "layout": {
+    "bottom": [
+      ["select-model", "calc-fps"],
+      [ "timestep-slider", "refreshrate-slider", "select-model-sample-rate"],
+      ["use-duration-pulldown", "requested-duration-slider", "actual-duration-output", "requested-duration-reset-button"]
+    ]
+  }
+}

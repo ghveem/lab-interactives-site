@@ -1,0 +1,200 @@
+{
+  "title": "Heat storage depends on size",
+  "publicationStatus": "public",
+  "subtitle": "Why does a bigger house need more energy to heat?",
+  "about": [
+    "How much heat stored in an object depends on its mass, or size, as described by the formula below:",
+    "",
+    "**Q** = *c*p · **m**(*T*final - *T*initial)",
+    "",
+    "**Note:** The specific heats of the two objects are different.",
+	"",
+    "Run the model and note the temperatures measured by the two thermometers.",
+    "Adjust the size of each block with the buttons. See if you can make the equilibrium temperature end up close to 25 °C."
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S1C.html",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S1C1",
+      "url": "models-converted/lab-version/1/energy2d/S1C1.json",
+      "importedFrom": "imports/energy2d/models-xml/S1C1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+        " function setControlsDisabled(value) {",
+        "  setComponentDisabled('cases-pulldown', value);",
+        "  setComponentDisabled('left-part-buttons', value);",
+        "  setComponentDisabled('right-part-buttons', value);",
+        "}",
+        "setControlsDisabled(false);",
+        "onStart(function () { setControlsDisabled(true); });"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "simulation-started",
+      "onChange": [
+        "setComponentDisabled('cases-pulldown', value);",
+        "setComponentDisabled('left-part-buttons', value);",
+        "setComponentDisabled('right-part-buttons', value);"
+      ],
+      "initialValue": false
+    },
+    {
+      "name": "right-block-specific-heat",
+      "label": "Right block specific heat",
+      "unitAbbreviation": "kg · °C",
+      "onChange": "getPart(1).specific_heat = value;",
+      "initialValue": 2000
+    },
+    {
+      "name": "right-block-size",
+      "onChange": [
+        "var part = getPart(1), sensor = getSensor(1);",
+        "switch(value) {",
+        "case 50:",
+        "  part.width = 0.15;",
+        "  part.x = 0.5;",
+        "  sensor.x = 0.575;",
+        "  break;",
+        "case 100:",
+        "  part.width = 0.3;",
+        "  part.x = 0.5;",
+        "  sensor.x = 0.65;",
+        "  break;",
+        "case 150:",
+        "  part.width = 0.45;",
+        "  part.x = 0.5;",
+        "  sensor.x = 0.725;",
+        "  break;",
+        "}"
+      ],
+      "initialValue": 100
+    },
+    {
+      "name": "left-block-size",
+      "onChange": [
+        "var part = getPart(0), sensor = getSensor(0);",
+        "switch(value) {",
+        "case 50:",
+        "  part.width = 0.15;",
+        "  part.x = 0.35;",
+        "  sensor.x = 0.425;",
+        "  break;",
+        "case 100:",
+        "  part.width = 0.3;",
+        "  part.x = 0.2;",
+        "  sensor.x = 0.35;",
+        "  break;",
+        "case 150:",
+        "  part.width = 0.45;",
+        "  part.x = 0.05;",
+        "  sensor.x = 0.275;",
+        "  break;",
+        "}"
+      ],
+      "initialValue": 100
+    }
+  ],
+  "components": [
+    {
+      "type": "pulldown",
+      "id": "cases-pulldown",
+      "label": "Cases:",
+      "labelOn": "left",
+      "property": "right-block-specific-heat",
+      "options": [
+        {
+          "text": "The left side has lower specific heat.",
+          "value": 2000
+        },
+        {
+          "text": "The right side has lower specific heat.",
+          "value": 500
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "part-size-label",
+      "text": "**Size**:"
+    },
+    {
+      "type": "radio",
+      "id": "left-part-buttons",
+      "label": "Left",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "left-block-size",
+      "options": [
+        {
+          "text": "50%",
+          "value": 50
+        },
+        {
+          "text": "100%",
+          "value": 100
+        },
+        {
+          "text": "150%",
+          "value": 150
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "right-part-buttons",
+      "label": "Right",
+      "labelOn": "left",
+      "orientation": "horizontal",
+      "property": "right-block-size",
+      "options": [
+        {
+          "text": "50%",
+          "value": 50
+        },
+        {
+          "text": "100%",
+          "value": 100
+        },
+        {
+          "text": "150%",
+          "value": 150
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": 0,
+      "ymax": 50,
+      "xmax": 300,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-0", "sensor-1"
+      ],
+      "legendLabels": [
+        "T1",
+        "T2"
+      ],
+      "legendVisible": true
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [ "cases-pulldown" ],
+      [ "part-size-label", "left-part-buttons", "right-part-buttons" ]
+    ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

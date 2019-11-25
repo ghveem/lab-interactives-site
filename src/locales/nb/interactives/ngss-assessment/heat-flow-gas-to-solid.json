@@ -1,0 +1,123 @@
+{
+  "title": "Heat Transfer between a Gas and a Solid",
+  "publicationStatus": "draft",
+  "subtitle": "NGSS Assessment Item",
+  "about": "",
+  "aspectRatio": 1.55,
+  "theme": ["hide-legends"],
+  "models": [
+    {
+      "type": "md2d",
+      "id": "liquid-solid",
+      "url": "models/lab-version/1/md2d/ngss-assessment/heat-transfer-solid-gas/heat-flow-solid-to-gas.json",
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "controlButtonStyle": "text",
+        "keShadingMaxEnergy": 0.1
+      },
+      "onLoad": [
+        "var smallAtoms = [];",
+        "var largeAtoms = [];",
+        "for (var i = 0; i < getNumberOfAtoms(); i++) {",
+        "  if (getAtomProperties(i).element == 0) {",
+        "    smallAtoms.push(i);",
+        "  } else {",
+        "    largeAtoms.push(i);",
+        "  }",
+        "}",
+        "set('smallAtomsIndices', smallAtoms);",
+        "set('largeAtomsIndices', largeAtoms);",
+        "setComponentDisabled('remove-obstacle',false);"
+      ]
+    }
+  ],
+  "propertiesToRetain": ["timeStepsPerTick"],
+  "parameters": [
+    {
+      "name": "smallAtomsIndices",
+      "initialValue": []
+    },
+    {
+      "name": "largeAtomsIndices",
+      "initialValue": []
+    },
+    {
+      "name": "raisingBarrier",
+      "initialValue": false
+    },
+    {
+      "name": "raisedStep",
+      "initialValue": 0
+    }
+  ],
+  "outputs": [
+    {
+      "name": "waterAvgKE",
+      "label": "Average KE of water particles",
+      "value": [
+        "return getTemperatureOfAtoms(get('smallAtomsIndices'));"
+      ]
+    }
+  ],
+  "filteredOutputs": [
+    {
+      "name": "smoothedKE",
+      "property": "waterAvgKE",
+      "period": 10000
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "keGraph",
+      "title": "Average Kinetic Energy of Gas Particles",
+      "xlabel": "Time",
+      "ylabel": "Average Kinetic Energy",
+      "hideAxisValues": true,
+      "enableZooming": false,
+      "enableAxisScaling": false,
+      "fontScaleRelativeToParent": true,
+      "ymin": 100,
+      "ymax": 500,
+      "xmax": 150,
+      "enableAutoScaleButton": true,
+      "properties": [
+        "smoothedKE"
+      ],
+      "width": "17em"
+    },
+    {
+      "type": "button",
+      "id": "remove-obstacle",
+      "text": "Remove Barrier",
+      "action": [
+      "if (getNumberOfObstacles() > 0) {",
+        "removeObstacle(0);",
+        "setComponentDisabled('remove-obstacle',true);",
+      "}"
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "slow-motion",
+      "text": "run in slow motion",
+      "textOn": "right",
+      "action": [
+        "if (value) {",
+        "  set('timeStepsPerTick', 5);",
+        "} else {",
+        "  set('timeStepsPerTick', 30);",
+        "}"
+      ]
+    }
+  ],
+  "layout": {
+    "bottom": [
+      "remove-obstacle", "slow-motion"
+    ],
+    "right":[
+      "keGraph"
+    ]
+  },
+  "template": "simple"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "NegativePressure_hardsphere",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "NegativePressure_hardsphere",
+      "url": "models-converted/lab-version/1/md2d/tutorial/NegativePressure_hardsphere.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

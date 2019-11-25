@@ -1,0 +1,24 @@
+{
+  "title": "CountingTool",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "CountingTool$0",
+      "url": "models-converted/lab-version/1/md2d/tutorial/CountingTool$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

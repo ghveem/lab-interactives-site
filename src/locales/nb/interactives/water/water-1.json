@@ -1,0 +1,108 @@
+{
+  "title": "Water 1",
+  "publicationStatus": "public",
+  "subtitle": "Simple Water Model",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Explore how water moves through rocks and sediments.",
+    "",
+    "Use the **Follow water droplet** button to watch where water goes after it falls."
+  ],
+ "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+              "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+              "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+              "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."],
+  "theme": [
+    "has",
+    "standalone-playback"
+  ],
+  "aspectRatio": 1.9,
+  "fontScale": 0.8,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "url": "models/lab-version/1/iframe-model/iframe-model.json",
+      "modelOptions":{
+        "url": "//models-resources.concord.org/agentscript/water/lab-embeddable.html",
+        "template": "state/low-res/WaterModel-WaterInTheWorld.json",
+        "rainProbability": 0.5,
+        "evapProbability": 20
+      },
+      "viewOptions": {
+        "aspectRatio": 3,
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+        "function disableComponents(value) {",
+        "  setComponentDisabled('followRainButton', value);",
+        "}",
+        "disableComponents(true);",
+        "onStart(function() { disableComponents(false); });",
+        "onStop(function() { disableComponents(true); });"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "followRain",
+      "initialValue": false,
+      "onChange": [
+        "// Note that we have to use .post() instead of method shortcuts, as this handler is",
+        "// called before iframe can register its methods (before iframe communication is started).",
+        "if (value) {",
+        "  post('addRainSpotlight');",
+        "  setComponentAttributes('followRainButton', {text: 'Stop following'});",
+        "} else {",
+        "  post('removeSpotlight');",
+        "  setComponentAttributes('followRainButton', {text: 'Follow water droplet'});",
+        "}"
+      ]
+    }
+  ],
+  "outputs": [
+  ],
+  "helpTips": [
+  ],
+  "components": [
+    {
+      "id": "followRainButton",
+      "type": "button",
+      "action": [
+        "set('followRain', !get('followRain'));"
+      ],
+      "text": "Follow water droplet",
+      "width": "14em"
+    },
+            {
+      "id": "playback",
+      "type": "playback",
+      "stepping": true
+    }
+  ],
+  
+    "layout": {
+    "playback-container":[
+    	"playback"
+    ], 
+    "bottom-1":[
+    
+    "followRainButton"
+    ]
+  },
+  "template": [
+    {
+      "id": "playback-container",
+      "top": "model.bottom",
+      "left": "model.left",
+      "margin": "0 0 1em 0"
+    },
+    {
+      "id": "bottom-1",
+      "top": "playback-container.bottom",
+      "left": "model.left",
+      "margin": "0.4em 0 0 0.2em 0"
+    }
+  ]
+}

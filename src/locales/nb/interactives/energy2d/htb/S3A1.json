@@ -1,0 +1,62 @@
+{
+  "title": "Conduction: Heat conduction through materials",
+  "publicationStatus": "public",
+  "subtitle": "Which material conducts heat most quickly?",
+  "about": [
+    "The bars (metal, stone, fiberglass and wood) have different conductivities.",
+    "Run the model and note the temperatures measured by the four thermometers.",
+    "Watch the changes of the temperatures in the graph.",
+    "In which material does heat flow the fastest? How can you tell?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S3A.html",
+  "aspectRatio": 1.5,
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S3A1",
+      "url": "models-converted/lab-version/1/energy2d/S3A1.json",
+      "importedFrom": "imports/energy2d/models-xml/S3A1.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2, T3, T4",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": -5,
+      "ymax": 50,
+      "xmax": 1200,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-2", "sensor-3", "sensor-0", "sensor-1"
+      ],
+      "dataColors": [
+        "#a00000",
+        "#2ca000",
+        "#2c00a0",  
+        "#7c00a0"
+      ],
+      "legendLabels": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "legendVisible": true
+    }
+  ],
+  "layout": {
+    "bottom": [
+    ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

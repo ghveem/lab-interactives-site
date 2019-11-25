@@ -1,0 +1,24 @@
+{
+  "title": "wallpressure",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "wallpressure$0",
+      "url": "models-converted/lab-version/1/md2d/tutorial/wallpressure$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

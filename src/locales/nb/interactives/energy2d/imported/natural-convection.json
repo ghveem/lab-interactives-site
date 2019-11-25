@@ -1,0 +1,20 @@
+{
+  "title": "Natural Convection",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "* no further description available",
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "natural-convection",
+      "url": "models-converted/lab-version/1/energy2d/natural-convection.json",
+      "importedFrom": "imports/energy2d/models-xml/natural-convection.e2d",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ]
+}

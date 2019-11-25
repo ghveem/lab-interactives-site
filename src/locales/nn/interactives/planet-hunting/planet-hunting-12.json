@@ -1,0 +1,215 @@
+{
+  "title": "Planet Hunting 12",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Habitability Challenge",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.15,
+  "fontScale": 0.7,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Many different factors affect a planet's suitability for life, including: ",
+    "star type, planet type, planet size, and the planet's orbital distance from its star.",
+    "",
+  	"Observe the orbits and star types of Planets A, B, C, and D to predict ",
+    "which planet would be most habitable."
+  ],
+ "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+              "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+              "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+              "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."],
+  "theme": [
+    "has",
+    "standalone-playback",
+    "no-slider-bar",
+    "graph-title-bg"
+  ],
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "url": "models/lab-version/1/iframe-model/iframe-model.json",
+      "onLoad": [],
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "modelOptions": {
+        "url": "//concord-consortium.github.io/space-models/planet-hunting/",
+        "timestep": 0.001,
+        "planet.diameter": 1,
+        "planet.rocky": true,
+        "telescope.precision": 100,
+        "habitationZone.visible": true,
+        "camera.tiltLocked": true
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "presetStar",
+      "initialValue": "Sun",
+      "onChange": [
+        "post('loadPreset', value);"
+      ]
+    },
+    {
+      "name": "presetPlanetAndStar",
+      "initialValue": "planet-A",
+      "onChange": [
+        "switch(value) {",
+        "  case 'planet-A':",
+        "    post('loadPreset', 'StarOrange');",
+        "    set('planet.x', 0.48 / Math.sqrt(2));",
+        "    set('planet.y', 0.48 / Math.sqrt(2));",
+        "    set('planet.diameter', 33);",
+        "    post('makeCircularOrbit');",
+        "    break;",
+        "  case 'planet-B':",
+        "    post('loadPreset', 'StarWhite');",
+        "    set('planet.x', 1.405102294);",
+        "    set('planet.y', 1.558349488);",
+        "    set('planet.vx', -3.418628348);",
+        "    set('planet.vy', 3.608049466);",
+        "    set('planet.diameter', 11);",
+        "    break;",
+        "  case 'planet-C':",
+        "    post('loadPreset', 'Sun');",
+        "    set('planet.x', 0.6766514088784666);",
+        "    set('planet.y', 0.7141059377580106);",
+        "    set('planet.vx', -4.364466726140016);",
+        "    set('planet.vy', 4.43717488714741);",
+        "    set('planet.diameter', 16);",
+        "    break;",
+        "  case 'planet-D':",
+        "    post('loadPreset', 'StarBlue');",
+        "    set('planet.x', 4.5 / Math.sqrt(2));",
+        "    set('planet.y', 4.5 / Math.sqrt(2));",
+        "    set('planet.diameter', 1);",
+        "    post('makeCircularOrbit');",
+        "    break;",
+        "}"
+      ]
+    },
+    {
+      "name": "speed",
+      "initialValue": 50,
+      "onChange": [
+        "var v = value / 50;",
+        "if (v > 1) v = Math.pow(v, 4);",
+        "if (v < 1) v = Math.sqrt(v);",
+        "set('timestep', 0.001 * v);"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "time",
+      "value": "return iframeOutput('time') * 365 || 0;"
+    }
+  ],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "timestep",
+      "type": "slider",
+      "min": 1,
+      "max": 100,
+      "steps": 100,
+      "title": "Speed",
+      "titlePosition": "top",
+      "fillColor": "#2DA343",
+      "labels": [
+        {
+          "value": 1,
+          "label": "slow"
+        },
+        {
+          "value": 100,
+          "label": "fast"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "property": "speed"
+    },
+    {
+      "id": "preset-star",
+      "type": "pulldown",
+      "label": "Preset planets and stars",
+      "labelOn": "left",
+      "options": [
+        {
+          "text": "Planet A - gaseous; Star type - yellow",
+          "value": "planet-A"
+        },
+        {
+          "text": "Planet B - rocky; Star type - white",
+          "value": "planet-B"
+        },
+        {
+          "text": "Planet C - rocky; Star type - yellow",
+          "value": "planet-C"
+        },
+        {
+          "text": "Planet D - rocky; Star type - blue",
+          "value": "planet-D"
+        }
+      ],
+      "property": "presetPlanetAndStar"
+    },
+    {
+      "id": "playback",
+      "type": "playback",
+      "stepping": true
+    }
+  ],
+  "layout": {
+    "playback-container": [
+      "playback"
+    ],
+    "playback-right": [
+      "timestep"
+    ],
+    "bottom-1": [
+      [
+        "preset-star"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "playback-container",
+      "top": "model.bottom",
+      "left": "model.left",
+      "padding-top": "0.75em",
+      "padding-right": "0.5em"
+    },
+    {
+      "id": "playback-right",
+      "top": "model.bottom",
+      "left": "playback-container.right"
+    },
+    {
+      "id": "bottom-1",
+      "left": "model.left",
+      "top": "playback-right.bottom",
+      "margin-top": "1em"
+    },
+    {
+      "id": "right-padding",
+      "width": "1em",
+      "left": "model.right"
+    }
+  ]
+}

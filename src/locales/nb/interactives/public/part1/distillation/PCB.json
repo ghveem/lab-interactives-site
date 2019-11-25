@@ -1,0 +1,23 @@
+{
+  "title": "PCB",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "PCB",
+      "url": "models-converted/lab-version/1/md2d/public/part1/distillation/PCB.json",
+      "importedFrom": "imports/legacy-mw-content/public/part1/distillation/PCB.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

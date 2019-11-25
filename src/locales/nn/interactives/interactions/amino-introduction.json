@@ -1,0 +1,167 @@
+{
+  "title": "Introduction to Amino Acids",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Understanding the building blocks of proteins.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.2,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": [
+    "This interactive was created by the [Concord Consortium](https://concord.org/) using our [Next-Generation Molecular Workbench](http://mw.concord.org/nextgen/) software, with funding by a grant from [Google.org](https://www.google.org/).",
+    "This interactive also uses [JSMol](https://sourceforge.net/projects/jsmol/), licensed under the [LGPL](http://www.gnu.org/licenses/lgpl.html) license."
+  ],
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Click on each scene number in order to zoom into part of a protein and see how amino acids link together to form proteins. You can interact with the molecule at any time ",
+    "by dragging it around.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.* Original Jsmol scripting done for the Science of Atoms and Molecules project DRL-0946582."
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "model": {
+        "url": "https://models-resources.concord.org/jsmol/embeddable.html"
+      },
+      "onLoad": [
+        "post('jsmolScript', 'calculate hydrogens ((50-54) and sidechain); script models/amino-introduction/init.spt;');"
+      ],
+      "viewOptions": {
+        "aspectRatio": 1.7,
+        "controlButtons": ""
+      },
+      "modelOptions": {
+        "molecule": "models/amino-introduction/1prn.pdb"
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "type": "text",
+      "id": "select-scene",
+      "text": "Step through each scene->"
+    },
+    {
+      "id": "scene1",
+      "type": "button",
+      "action": [
+        "post('jsmolScript', 'script models/amino-introduction/intro-sidechains-scene1.spt;');",
+        "setComponentDisabled('scene1',true);",
+        "setComponentDisabled('scene2',false);"
+      ],
+      "text": "1",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "scene2",
+      "type": "button",
+      "action": [
+        "post('jsmolScript', 'script models/amino-introduction/intro-sidechains-scene2.spt;');",
+        "setComponentDisabled('scene2',true);",
+        "setComponentDisabled('scene3',false);"
+      ],
+      "text": "2",
+      "width": "",
+      "height": "",
+      "disabled": true,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "scene3",
+      "type": "button",
+      "action": [
+        "post('jsmolScript', 'script models/amino-introduction/intro-sidechains-scene3.spt;');",
+        "setComponentDisabled('scene3',true);",
+        "setComponentDisabled('scene4',false);"
+      ],
+      "text": "3",
+      "width": "",
+      "height": "",
+      "disabled": true,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "scene4",
+      "type": "button",
+      "action": [
+        "post('jsmolScript', 'script models/amino-introduction/intro-sidechains-scene4.spt;');",
+        "setComponentDisabled('scene4',true);",
+        "setComponentDisabled('scene5',false);"
+      ],
+      "text": "4",
+      "width": "",
+      "height": "",
+      "disabled": true,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "scene5",
+      "type": "button",
+      "action": [
+        "post('jsmolScript', 'script models/amino-introduction/intro-sidechains-scene5.spt;');",
+        "setComponentDisabled('scene5',true);"
+      ],
+      "text": "5",
+      "width": "",
+      "height": "",
+      "disabled": true,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "reset",
+      "type": "button",
+      "action": [
+        "reloadModel()",
+        "setComponentDisabled('scene1',false);",
+        "setComponentDisabled('scene2',true);",
+        "setComponentDisabled('scene3',true);",
+        "setComponentDisabled('scene4',true);",
+        "setComponentDisabled('scene5',true);"
+      ],
+      "text": "reset",
+      "width": "",
+      "height": "",
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "type": "text",
+      "id": "drag-text",
+      "text": "_Drag the molecule to rotate or shift-and-drag/pinch to zoom._"
+    }
+  ],
+  "layout": {
+    "bottom": [
+      ["select-scene","scene1","scene2","scene3","scene4","scene5","reset","drag-text"]
+    ]
+  }
+}

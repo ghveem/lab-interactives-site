@@ -1,0 +1,149 @@
+{
+  "title": "Light absorption / emission",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Absorption & Emission of Photons",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.4,
+  "fontScale": 0.95,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": [
+    "This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+    "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+    "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+    "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."
+  ],
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Discover what happens when a particular frequency of light is absorbed by an atom.",
+    "",
+    "Press the **Play** button.",
+    "Change the **Energy of monochromatic light source** slider to see photons at different energy levels. ",
+    "To make sure you see all the wavelengths [or photons], select the slider and use the arrow keys to ",
+    "step through each wavelength.",
+    "Wait for at least three series of a photon before moving to a different wavelength.",
+    "The atoms will either absorb or let pass photons of each frequency.",
+    "",
+    "Which frequency of light is absorbed and re-emitted by these atoms?",
+    "How does the model represent this?"
+  ],
+  "theme": [
+    "has",
+    "standalone-playback",
+    "no-slider-bar"
+  ],
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "elementA",
+      "url": "models-converted/lab-version/1/md2d/space/light-absorption-emission/HASlight$0.json",
+      "onLoad": [
+        "setElementProperties(3, {epsilon: 0});",
+        "setLightSourceNumber(4);"
+      ],
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "backgroundColor": "#fff"
+      },
+      "modelOptions": {
+        "timeStep": 3,
+        "timeStepsPerTick": 5
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "lightSourceFrequency",
+      "initialValue": 1.725,
+      "onChange": "setLightSourceFrequency(value);"
+    },
+    {
+      "name": "lightSourceIntensity",
+      "initialValue": 0,
+      "onChange": "setLightSourcePeriod(600 - value);"
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "playback",
+      "type": "playback",
+      "stepping": true
+    },
+    {
+      "id": "light-source-frequency",
+      "type": "slider",
+      "min": 4.8,
+      "max": 12.6,
+      "steps": 17,
+      "title": "Energy of monochromatic light source",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 5.4,
+          "label": "Infrared"
+        },
+        {
+          "value": 11.8,
+          "label": "Ultraviolet"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "property": "lightSourceFrequency",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "light-source-intensity",
+      "type": "slider",
+      "min": 0,
+      "max": 200,
+      "steps": 50,
+      "title": "Intensity of light source",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 20,
+          "label": "Weak"
+        },
+        {
+          "value": 175,
+          "label": "Strong"
+        }
+      ],
+      "width": "auto",
+      "height": "auto",
+      "property": "lightSourceIntensity",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "key",
+      "type": "image",
+      "src": "interactives/space/wave_length_key.png",
+      "urlRelativeTo": "page",
+      "width": "auto",
+      "height": "7em",
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {},
+  "template": "simple"
+}

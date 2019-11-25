@@ -1,0 +1,65 @@
+{
+  "title": "Water 3",
+  "publicationStatus": "public",
+  "subtitle": "Comparing Permeabilities of Different Sediments/Rocks",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Compare the behavior of water as it hits sediments/rocks of differing permeability."
+    ],
+  "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+              "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+              "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+              "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."],
+  "theme": [
+    "has",
+    "standalone-playback"
+  ],
+  "aspectRatio": 1.9,
+  "fontScale": 0.8,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "url": "models/lab-version/1/iframe-model/iframe-model.json",
+      "modelOptions":{
+        "url": "//models-resources.concord.org/agentscript/water/lab-embeddable.html",
+        "template": "state/low-res/WaterModel-5-23-11-compareLayers.json",
+        "rainProbability": 1.0,
+        "evapProbability": 0
+      },
+      "viewOptions": {
+        "aspectRatio": 2.7,
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+      ]
+    }
+  ],
+  "parameters": [
+  ],
+  "outputs": [
+  ],
+  "helpTips": [
+  ],
+  "components": [
+    {
+      "id": "playback",
+      "type": "playback",
+      "stepping": true
+    }
+  ],
+  "layout": {
+    "playback-container": [
+      "playback"
+    ]
+  },
+  "template": [
+    {
+      "id": "playback-container",
+      "top": "model.bottom",
+      "left": "model.left",
+      "margin": "0em 0 1em 0"
+    }
+  ]
+}

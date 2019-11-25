@@ -1,0 +1,24 @@
+{
+  "title": "nailsoft",
+  "publicationStatus": "broken",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "nailsoft",
+      "url": "models-converted/lab-version/1/md2d/student/materials/nailsoft.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

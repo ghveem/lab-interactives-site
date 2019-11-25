@@ -1,0 +1,23 @@
+{
+  "title": "equil1a",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "equil1a$0",
+      "url": "models-converted/lab-version/1/md2d/public/part1/chemequil/equil1a$0.json",
+      "importedFrom": "imports/legacy-mw-content/public/part1/chemequil/equil1a$0.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

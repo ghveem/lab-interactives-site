@@ -1,0 +1,60 @@
+{
+  "title": "Conduction: The effect of wall thickness",
+  "publicationStatus": "public",
+  "subtitle": "Which wall loses thermal energy more quickly, thick or thin?",
+  "about": [
+    "The rate of heat conduction depends on how far heat has to travel (*L*) as described below:",
+    "",
+    "Δ*Q*/Δ*t* = -<**k** *A*Δ*T*/*L*",
+    "",
+    "(In other words, the heat transfer rate is inversely proportional to the distance heat has to travel.)",
+    "",
+	"On the left are two separate heat sources with a constant temperature. On the right are two separate objects with thermometers",
+    "that measure how much heat has been conducted. The upper test piece is twice as long as the lower one. Both are made of the same material.",
+	"Run the model and watch the changes of the temperatures in the graph. Which bar transfers heat the fastest? How can you tell?"
+  ],
+  "importedFrom": "imports/energy2d/content-htb/S3C.html",
+  "aspectRatio": 1.5,
+  "models": [
+    {
+      "type": "energy2d",
+      "id": "S3C1",
+      "url": "models-converted/lab-version/1/energy2d/S3C1.json",
+      "importedFrom": "imports/energy2d/models-xml/S3C1.e2d",
+      "onLoad": "callAt(4000, function() { stop(); });",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "graph",
+      "title": "Temperature Probes: T1, T2",
+      "xlabel": "Time (s)",
+      "ylabel": "Temperature (°C)",
+      "ymin": -5,
+      "ymax": 55,
+      "xmax": 4100,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "time",
+      "properties": [
+        "sensor-1", "sensor-0"
+      ],
+      "legendLabels": [
+        "T1",
+      	"T2"
+      ],
+      "legendVisible": true
+    }
+  ],
+  "layout": {
+    "bottom": [
+    ],
+    "right": [ "graph" ]
+  },
+  "template": "wide-right"
+}

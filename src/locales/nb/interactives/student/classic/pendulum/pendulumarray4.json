@@ -1,0 +1,24 @@
+{
+  "title": "pendulumarray4",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "pendulumarray4",
+      "url": "models-converted/lab-version/1/md2d/student/classic/pendulum/pendulumarray4.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

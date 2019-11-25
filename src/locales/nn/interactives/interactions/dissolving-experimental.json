@@ -1,0 +1,307 @@
+{
+  "title": "Dissolving Experimental",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Explore how molecules of different polarity interact when mixed.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.2,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Select the polarity of two different molecules and simulate what happens when these two molecules of different (or the same) ",
+    "polarities are mixed. Speed up the simulation to reach an outcome faster, or keep it slow to observe the interactions between atoms. ",
+    "Then draw conclusions about how polarity impacts how different substances dissolve.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "salt",
+      "url": "models/lab-version/1/md2d/interactions/dissolving-experimental/model.json",
+      "onLoad": [
+        "set('targetTemperature', 1829);",
+        "set('purpleEpsilon', 0.317);",
+        "set('greenEpsilon', 0.317);"
+      ],
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "controlButtonStyle": "text"
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "chargeSign",
+      "initialValue": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    {
+      "name": "minCharge",
+      "initialValue": 0,
+      "onChange": [
+        "if (get('purpleCharge') !== get('greenCharge')) {",
+        "  setPairwiseLJProperties(0, 2, {epsilon: -0.2});",
+        "} else {",
+        "  (get('purpleCharge') === 1 ? setPairwiseLJProperties(0, 2, {epsilon: -0.1}) : setPairwiseLJProperties(0, 2, {epsilon: -0.317}));",
+        "}",
+        "(get('purpleCharge') === 1) ? set('purpleEpsilon', 0.1) : set('purpleEpsilon',0.317);",
+        "(get('greenCharge') === 1) ? set('greenEpsilon', 0.1) : set('greenEpsilon',0.317);"
+      ]
+    },
+    {
+      "name": "greenCharge",
+      "initialValue": 0,
+      "onChange": [
+        "batch(function () {",
+        "  var count = getNumberOfAtoms();",
+        "  var chargeSign = get('chargeSign');",
+        "  for (var i = 0; i < count; i++) {",
+        "    var a = getAtomProperties(i);",
+        "    if (a.element === 0) {",
+        "      setAtomProperties(i, {charge: chargeSign[i] * value});",
+        "    }",
+        "  }",
+        "set('minCharge', Math.min(value, get('purpleCharge')));",
+        "});"
+      ]
+    },
+    {
+      "name": "purpleCharge",
+      "initialValue": 0,
+      "onChange": [
+        "batch(function () {",
+        "  var count = getNumberOfAtoms();",
+        "  var chargeSign = get('chargeSign');",
+        "  for (var i = 0; i < count; i++) {",
+        "    var a = getAtomProperties(i);",
+        "    if (a.element === 2) {",
+        "      setAtomProperties(i, {charge: chargeSign[i] * value});",
+        "    }",
+        "  }",
+        "set('minCharge', Math.min(value, get('greenCharge')));",
+        "});"
+      ]
+    },
+    {
+      "name": "fastForward",
+      "initialValue": false,
+      "onChange": "set('timeStep', value ? 7 : 1);"
+    },
+    {
+      "name": "greenEpsilon",
+      "initialValue": 0.317,
+      "onChange": "setElementProperties(0, { epsilon: -value });"
+    },
+    {
+      "name": "purpleEpsilon",
+      "initialValue": 0.317,
+      "onChange": "setElementProperties(2, { epsilon: -value });"
+    },
+    {
+      "name": "chargeShadingAndSymbols",
+      "initialValue": false,
+      "onChange": [
+        "set('chargeShading', value);",
+        "set('showChargeSymbols', value);"
+      ]
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "dataSets": [],
+  "components": [
+    {
+      "id": "show-shading",
+      "type": "checkbox",
+      "text": "Show charge shading",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "chargeShadingAndSymbols",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "show-interactions",
+      "type": "checkbox",
+      "text": "Show interactions between atoms",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "showVDWLines",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "purple-charge",
+      "type": "slider",
+      "min": 0,
+      "max": 1,
+      "steps": 2,
+      "title": "Set polarity of purple molecules",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "none"
+        },
+        {
+          "value": 0.5,
+          "label": "medium"
+        },
+        {
+          "value": 1,
+          "label": "high"
+        }
+      ],
+      "width": "45%",
+      "height": "auto",
+      "property": "purpleCharge",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "green-charge",
+      "type": "slider",
+      "min": 0,
+      "max": 1,
+      "steps": 2,
+      "title": "Set polarity of green molecules",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "none"
+        },
+        {
+          "value": 0.5,
+          "label": "medium"
+        },
+        {
+          "value": 1,
+          "label": "high"
+        }
+      ],
+      "width": "45%",
+      "height": "auto",
+      "property": "greenCharge",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "fast-forward",
+      "type": "checkbox",
+      "text": "Fast forward",
+      "textOn": "right",
+      "width": "auto",
+      "height": "auto",
+      "property": "fastForward",
+      "retainProperty": true,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      [
+        "purple-charge",
+        "green-charge"
+      ],
+      [
+        "show-shading",
+        "show-interactions",
+        "fast-forward"
+      ]
+    ],
+    "right": []
+  },
+  "template": [
+    {
+      "id": "right",
+      "top": "model.top",
+      "bottom": "model.bottom",
+      "left": "model.right",
+      "padding-left": "1em",
+      "padding-right": "1em"
+    },
+    {
+      "id": "bottom",
+      "top": "right.bottom",
+      "left": "model.left",
+      "width": "interactive.width",
+      "padding-top": "0.5em"
+    }
+  ]
+}

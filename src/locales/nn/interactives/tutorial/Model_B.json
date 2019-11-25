@@ -1,0 +1,24 @@
+{
+  "title": "Model_B",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "Model_B",
+      "url": "models-converted/lab-version/1/md2d/tutorial/Model_B.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

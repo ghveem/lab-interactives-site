@@ -1,0 +1,239 @@
+{
+  "title": "Deformed Electron Cloud",
+  "publicationStatus": "public",
+  "labEnvironment": "production",
+  "subtitle": "Explore the effect of charges on electron distribution.",
+  "category": "",
+  "subCategory": "",
+  "screenshot": "",
+  "aspectRatio": 1.13,
+  "fontScale": 1,
+  "lang": "en-US",
+  "i18nMetadata": "",
+  "credits": "",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+    "Explore the effect of charges on the electron distribution of the atom by using slider bars",
+    " to alter the charges outside the atom. Then analyze different combinations of outside charges",
+    " and observe their effect to draw conclusions about how charges affect the overall shape of atoms.",
+    "***",
+    "*This simulation was developed by [the Interactions project](https://concord.org/projects/interactions \"the Interactions Project\") ",
+    "with funding from the National Science Foundation (DRL-1232388) in partnership with ",
+    "[the CREATE for STEM Institute](http://create4stem.msu.edu/ \"the CREATE for STEM Institute\") at Michigan State University. To learn more, ",
+    "[visit the Interactions curriculum collection](https://learn.concord.org/interactions \"visit the Interactions curriculum collection\") in ",
+    "which this simulation is embedded.*"
+  ],
+  "theme": "",
+  "showTopBar": true,
+  "showBottomBar": true,
+  "padding": 10,
+  "models": [
+    {
+      "type": "md2d",
+      "id": "deformedCloud$0",
+      "url": "models/lab-version/1/md2d/interactions/deformed-electron-cloud/deformedCloud.json",
+      "importedFrom": "imports/legacy-mw-content/interactions/deformed-electron-cloud/deformedCloud$0.mml",
+      "onLoad": [
+        "",
+        "",
+        "//Add electrons",
+        "var centerAtom = getAtomProperties(0),",
+        "    maxElectrons = 1;",
+        "for (var e = 0; e < maxElectrons; e++) {",
+        "  addShape({",
+        "    type: 'ellipse',",
+        "    width: 0.03,",
+        "    height: 0.03,",
+        "    x: centerAtom.x,",
+        "    y: centerAtom.y,",
+        "    fence: 0,",
+        "    color: 'rgb(255, 0, 0)',",
+        "    lineColor: 'black',",
+        "    lineDashes: 'none',",
+        "    lineWeight: 0,",
+        "    layer: 1,",
+        "    layerPosition: 100,",
+        "    visible: 1",
+        "  });",
+        "};",
+        "function randomizeElectrons(){",
+        "  var centerEllipse = getShapeProperties(2),",
+        "      randomAngle,",
+        "      randomDistance;",
+        "  for (var e = 0; e < maxElectrons; e++) {",
+        "    randomAngle = 2 * Math.PI * Math.random();",
+        "    randomDistance = Math.sqrt(-2 * Math.log(Math.random()));",
+        "    // Convert random angle and distance from polar",
+        "    // to rectangular coordinates",
+        "    setShapeProperties(getNumberOfShapes() - maxElectrons + e, {",
+        "      x: centerEllipse.x + centerEllipse.width * (0.5 + 0.125 * randomDistance * Math.cos(randomAngle)),",
+        "      y: centerEllipse.y + centerEllipse.height * (0.5 + 0.125 * randomDistance * Math.sin(randomAngle)),",
+        "    })",
+        "  }",
+        "}",
+        "function updateCloudShape(){",
+        "  var leftCharge = get('left-charge'),",
+        "      rightCharge = get('right-charge'),",
+        "      squeeze = 0.25 * (Math.abs(leftCharge) + Math.abs(rightCharge))",
+        "                    * (1 + 1.25 * Math.min(Math.max(leftCharge, rightCharge), 0)),",
+        "      displacement = -0.25 * leftCharge + 0.25 * rightCharge;",
+        "  var newWidth = 1.5 + squeeze,",
+        "      newHeight = 1.5 - squeeze;",
+        "  setShapeProperties(2, {",
+        "    width: newWidth,",
+        "    height: newHeight,",
+        "    x: centerAtom.x - newWidth / 2 + displacement,",
+        "    y: centerAtom.y - newHeight / 2",
+        "  });",
+        "}",
+        "var positiveChargeUri = 'Positive.png',",
+        "  negativeChargeUri = 'Negative.png';",
+        "function updateChargedPlates(rightPlate) {",
+        "  var charge = get(rightPlate ? 'right-charge' : 'left-charge'),",
+        "    chargeAsColor = 255 - Math.floor(100 * Math.abs(charge));",
+        "  setShapeProperties(rightPlate ? 1 : 0, {",
+        "    color: charge > 0 ? 'rgb(' + chargeAsColor + ',' + chargeAsColor + ',255)' : charge < 0 ? 'rgb(255,' + chargeAsColor + ',' + chargeAsColor + ')' : 'white'",
+        "  });",
+        "  setImageProperties(rightPlate ? 1 : 0, {",
+        "    imageUri: charge > 0 ? positiveChargeUri : negativeChargeUri,",
+        "    visible: charge !== 0",
+        "  });",
+        "}",
+        "callEvery(100,function(){",
+        "  batch(randomizeElectrons);",
+        "});",
+        "onPropertyChange('left-charge',function(){",
+        "  updateCloudShape();updateChargedPlates(false);",
+        "});",
+        "onPropertyChange('right-charge',function(){",
+        "  updateCloudShape();updateChargedPlates(true);",
+        "});",
+        "start();",
+        "updateCloudShape();"
+      ],
+      "viewOptions": {
+        "controlButtons": "",
+        "enableKeyboardHandlers": false,
+        "imageMapping": {
+          "Positive.png": "Positive.svg",
+          "Negative.png": "Negative.svg"
+        }
+      },
+      "modelOptions": {
+        "useDuration": false
+      }
+    }
+  ],
+  "propertiesToRetain": [],
+  "parameters": [
+    {
+      "name": "left-charge",
+      "initialValue": 0
+    },
+    {
+      "name": "right-charge",
+      "initialValue": 0
+    }
+  ],
+  "outputs": [],
+  "filteredOutputs": [],
+  "helpTips": [],
+  "exports": {
+    "selectionComponents": [],
+    "perRun": [
+      "left-charge",
+      "right-charge"
+    ],
+    "perTick": []
+  },
+  "logging": {
+    "enabled": true,
+    "properties": [
+      "left-charge",
+      "right-charge"
+    ],
+    "components": "all"
+  },
+  "dataSets": [],
+  "components": [
+    {
+      "id": "left-charge-slider",
+      "type": "slider",
+      "min": -1,
+      "max": 1,
+      "steps": 30,
+      "title": "Left Charge",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "0"
+        },
+        {
+          "value": -0.8,
+          "label": "Negative"
+        },
+        {
+          "value": 0.8,
+          "label": "Positive"
+        }
+      ],
+      "width": "16em",
+      "height": "auto",
+      "retainProperty": true,
+      "action": "set({'left-charge': value});",
+      "initialValue": 0,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "right-charge-slider",
+      "type": "slider",
+      "min": -1,
+      "max": 1,
+      "steps": 30,
+      "title": "Right Charge",
+      "titlePosition": "top",
+      "labels": [
+        {
+          "value": 0,
+          "label": "0"
+        },
+        {
+          "value": -0.8,
+          "label": "Negative"
+        },
+        {
+          "value": 0.8,
+          "label": "Positive"
+        }
+      ],
+      "width": "16em",
+      "height": "auto",
+      "retainProperty": true,
+      "action": "set({'right-charge': value});",
+      "initialValue": 0,
+      "disabled": false,
+      "tooltip": "",
+      "helpIcon": false
+    }
+  ],
+  "layout": {
+    "bottom": [
+      "left-charge-slider",
+      "right-charge-slider"
+    ]
+  },
+  "template": [
+    {
+      "id": "bottom",
+      "top": "model.bottom",
+      "width": "model.width",
+      "left": "model.left",
+      "padding-top": "0.5em",
+      "align": "center"
+    }
+  ]
+}

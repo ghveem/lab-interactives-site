@@ -1,0 +1,24 @@
+{
+  "title": "RectangleInModel",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "RectangleInModel$0",
+      "url": "models-converted/lab-version/1/md2d/tutorial/RectangleInModel$0.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}

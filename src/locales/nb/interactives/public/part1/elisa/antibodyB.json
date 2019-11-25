@@ -1,0 +1,23 @@
+{
+  "title": "antibodyB",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "antibodyB",
+      "url": "models-converted/lab-version/1/md2d/public/part1/elisa/antibodyB.json",
+      "importedFrom": "imports/legacy-mw-content/public/part1/elisa/antibodyB.mml",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+  ],
+  "layout": {
+    "bottom": [
+    ]
+  }
+}

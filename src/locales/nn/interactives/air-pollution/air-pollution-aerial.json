@@ -1,0 +1,203 @@
+{
+  "title": "Air Pollution - Aerial",
+  "publicationStatus": "public",
+  "subtitle": "Aerial View",
+  "helpOnLoad": false,
+  "aboutOnLoad": true,
+  "about": [
+  	"Explore the effect of wind and geography on regional air quality.",
+  	"Explore how emissions can affect air quality in distant places.",
+  	"",
+  	 "Click on the model to add up to four power plants.",
+      "",
+      "Use the **wind control** to change the wind speed and direction.",
+      "",
+      "The **Air Quality Index** shows the air quality in Cities A, B, and C."
+  	],
+  "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
+              "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
+              "(DRL-0929774, DRL-1220756 ) in partnership with the ",
+              "[National Geographic Society](http://nationalgeographic.org/education/ \"National Geographic Society\")."],
+  "theme": ["has","standalone-playback"],
+  "aspectRatio": 1.2,
+  "fontScale": 0.8,
+  "models": [
+    {
+      "type": "iframe-model",
+      "id": "iframe-model",
+      "url": "models/lab-version/1/iframe-model/iframe-model.json",
+      "modelOptions":{
+        "url": "//models-resources.concord.org/agentscript/air-pollution-aerial/lab-embeddable.html",
+        "wind": {
+          "magnitude": 0,
+          "direction": 0
+        }
+      },
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      },
+      "onLoad": [
+      ]
+    }
+  ],
+  "parameters": [
+  ],
+  "outputs": [
+    {
+      "name": "cityAQuality",
+      "value": "return iframeOutput('cityAQuality');"
+    },
+    {
+      "name": "cityBQuality",
+      "value": "return iframeOutput('cityBQuality');"
+    },
+    {
+      "name": "cityCQuality",
+      "value": "return iframeOutput('cityCQuality');"
+    }
+  ],
+  "components": [
+    {
+      "id": "airQualityTitle",
+      "type": "text",
+      "text": "Air Quality",
+      "width": "100%",
+      "height": "0.7em",
+      "tooltip": ""
+    },
+    {
+      "id": "scale",
+      "type": "div",
+      "content": [
+        "<div style='width: 100%; height: 100%; text-align: right;'>",
+        "  <div style='width: 6em; height: 9.1em; padding: 0.5em; margin: auto 1em auto auto; border: 2px solid #BBBBBB; display: inline-block; position: relative;'>",
+        "    <div style='height: 100%; width: 25%; background: #ff3232; background: -moz-linear-gradient(top,  #ff3232 0%, #edf72e 50%, #2aff00 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3232), color-stop(50%,#edf72e), color-stop(100%,#2aff00)); background: -webkit-linear-gradient(top,  #ff3232 0%,#edf72e 50%,#2aff00 100%); background: -o-linear-gradient(top,  #ff3232 0%,#edf72e 50%,#2aff00 100%); background: -ms-linear-gradient(top,  #ff3232 0%,#edf72e 50%,#2aff00 100%); background: linear-gradient(to bottom,  #ff3232 0%,#edf72e 50%,#2aff00 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3232', endColorstr='#2aff00',GradientType=0 );'></div>",
+        "    <span style='position: absolute; top: 0.5em; left: 50%;'>Poor</span>",
+        "    <span style='position: absolute; top: 45%; left: 50%;'>Fair</span>",
+        "    <span style='position: absolute; bottom: 0.5em; left: 50%;'>Good</span>",
+        "  </div>",
+        "</div>"
+      ],
+      "width": "100%",
+      "height": "100%",
+      "tooltip": "Air Quality Scale"
+    },
+    {
+      "id": "windJoystick",
+      "type": "joystick",
+      "title": "Wind",
+      "property": "wind",
+      "scale": 30,
+      "width": "10em",
+      "height": "10em",
+      "tooltip": "Move the joystick to change the wind direction and speed.",
+      "displayValue":[
+        "var speed = Math.round(value.magnitude),",
+        "    out = '' + speed + ' MPH';",
+        "if (speed >= 1) {",
+        "  out += ' from the ' + getCardinalDirection(value.direction, true);",
+        "}",
+        "return out;"
+      ]
+    },
+    {
+      "id": "city-a-aq",
+      "type": "colorIndicator",
+      "property": "cityAQuality",
+      "title": "City A",
+      "width": "auto",
+      "height": "auto",
+      "colorValue": "return 'hsl('+value+',100%,50%)';",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "city-b-aq",
+      "type": "colorIndicator",
+      "property": "cityBQuality",
+      "title": "City B",
+      "width": "auto",
+      "height": "auto",
+      "colorValue": "return 'hsl('+value+',100%,50%)';",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "city-c-aq",
+      "type": "colorIndicator",
+      "property": "cityCQuality",
+      "title": "City C",
+      "width": "auto",
+      "height": "auto",
+      "colorValue": "return 'hsl('+value+',100%,50%)';",
+      "tooltip": "",
+      "helpIcon": false
+    },
+    {
+      "id": "playback",
+      "type": "playback",
+      "stepping": true
+    }
+  ],
+ "layout": {
+	"playback-container": [
+      "playback"
+    ],
+    "rightTop": [
+      [
+        "airQualityTitle"
+      ],
+      [
+        "city-a-aq"
+      ],
+      [
+        "city-b-aq"
+      ],
+      [
+        "city-c-aq"
+      ]
+    ],
+    "rightRightTop": [
+      "scale"
+    ],
+    "bottom-1": [
+      [
+        "windJoystick"
+      ]
+    ]
+  },
+  "template": [
+    {
+      "id": "playback-container",
+      "top": "model.bottom",
+      "left": "model.left"
+    
+    },
+    {
+      "id": "bottom-1",
+      "left": "model.width / 3",
+      "top": "playback-container.bottom",
+      "padding-left": "0.5em"
+    },
+    {
+      "id": "rightRightTop",
+      "right": "interactive.right",
+      "top": "model.top",
+      "width": "0.3 * model.width",
+      "height": "interactive.height / 2",
+      "padding-top": "1.7em",
+      "padding-bottom": "1em",
+      "padding-left": "0.5em"
+    },
+    {
+      "id": "rightTop",
+      "left": "model.right",
+      "top": "model.top",
+      "width": "0.3 * model.width",
+      "height": "interactive.height / 2",
+      "padding-bottom": "1em",
+      "padding-left": "0.5em"
+    }
+  ],
+  "i18nMetadata": "locales/metadata/interactives/air-pollution/air-pollution-aerial.json"
+}

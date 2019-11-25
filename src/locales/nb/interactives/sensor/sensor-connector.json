@@ -1,0 +1,89 @@
+{
+  "title": "Sensor Connector",
+  "publicationStatus": "draft",
+  "labEnvironment": "development",
+  "subtitle": "Collect data wirelessly from the locally running Sensor Connector.",
+  "about": "",
+  "fontscale": 0.9,
+  "models": [
+    {
+      "type": "sensor-connector",
+      "id": "signal1",
+      "model": {},
+      "viewOptions": {
+        "controlButtons": "play_reset",
+        "controlButtonStyle": "text"
+      },
+      "modelOptions": {
+        "useDuration": true
+      },
+      "onLoad": [
+        "function setGraphRange() {",
+        "  syncAxisRangesToPropertyRanges('propertiesGraph');",
+        "  resetGraphSelection('propertiesGraph');",
+        "}",
+        "onPropertyChange('actualDuration', setGraphRange);",
+        "setGraphRange();"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "type": "graph",
+      "id": "propertiesGraph",
+      "title": "",
+      "xlabel": "Time (s)",
+      "ymin": 0,
+      "ymax": 6,
+      "xmax": 10,
+      "xTickCount": 5,
+      "xFormatter": ".2s",
+      "yFormatter": ".2s",
+      "xProperty": "displayTime",
+      "properties": [
+        "sensorReading"
+      ],
+      "enableSelectionButton": true,
+      "clearSelectionOnLeavingSelectMode": true,
+      "resetAxesOnReset": false
+    }
+  ],
+  "layout": {
+    "below-model": [
+      "propertiesGraph"
+    ]
+  },
+  "template": [
+    {
+      "id": "below-model",
+      "top": "model.bottom",
+      "padding-top": "0.5em",
+      "bottom": "interactive.bottom",
+      "padding-bottom": "2em",
+      "width": "interactive.width",
+      "padding-right": "1em"
+    },
+    {
+      "id": "model-left",
+      "top": "model.top",
+      "right": "model.left",
+      "padding-right": "0.5em"
+    }
+  ],
+  "logging": {
+    "properties": [
+      "sensorName"
+    ]
+  },
+  "exports": {
+    "selectionComponents": [
+      "propertiesGraph"
+    ],
+    "perRun": [
+      "sensorName"
+    ],
+    "perTick": [
+      "sensorReading"
+    ]
+  }
+}

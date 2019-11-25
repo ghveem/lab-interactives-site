@@ -1,0 +1,24 @@
+{
+  "title": "hexshockwave_ellipticalwave",
+  "publicationStatus": "draft",
+  "subtitle": "",
+  "about": "",
+  "models": [
+    {
+      "type": "md2d",
+      "id": "hexshockwave_ellipticalwave",
+      "url": "models-converted/lab-version/1/md2d/student/materials/hexshockwave_ellipticalwave.json",
+      "viewOptions": {
+        "controlButtons": "play_reset"
+      }
+    }
+  ],
+  "components": [
+
+  ],
+  "layout": {
+    "bottom": [
+
+    ]
+  }
+}
