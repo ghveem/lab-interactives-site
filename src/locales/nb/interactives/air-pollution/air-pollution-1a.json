@@ -1,7 +1,7 @@
 {
-  "title": "Air Pollution 1a",
+  "title": "Luftforurensing 1a",
   "publicationStatus": "public",
-  "subtitle": "Wind, Geography, and Pollution Sources (no graph)",
+  "subtitle": "Vind, geografi og forurensingskilder (uten graf)",
   "helpOnLoad": false,
   "aboutOnLoad": true,
   "about": [
@@ -59,7 +59,7 @@
       "min": -100,
       "max": 100,
       "steps": 10,
-      "title": "Wind",
+      "title": "Vind",
        "fillColor": "#459ACE",
       "fillToValue": 0,
       "labels": [
@@ -81,7 +81,7 @@
       "property": "windSpeed",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the speed and direction of the wind."
+      "tooltip": "Endre vindretning og vindhastighet."
     },
     {
       "id": "carsSlider",
@@ -89,7 +89,7 @@
       "min": 0,
       "max": 10,
       "steps": 10,
-      "title": "Cars",
+      "title": "Biler",
       "fillColor": "#D84748",
       "labels": [
         {
@@ -106,7 +106,7 @@
       "property": "numCars",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the number of cars."
+      "tooltip": "Endre antall biler."
     },
     {
       "id": "factoriesSlider",
@@ -114,7 +114,7 @@
       "min": 0,
       "max": 5,
       "steps": 5,
-      "title": "Power Plants",
+      "title": "Kraftstasjoner",
       "fillColor": "#E67E22",
       "labels": [
         {
@@ -131,7 +131,7 @@
       "property": "numFactories",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the number of power plants."
+      "tooltip": "Endre antall kraftstasjoner"
     },
     {
       "id": "playback",

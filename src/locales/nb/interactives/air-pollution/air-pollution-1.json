@@ -1,7 +1,7 @@
 {
-  "title": "Air Pollution 1",
+  "title": "Luftforurensing 1",
   "publicationStatus": "public",
-  "subtitle": "Wind, Geography, and Pollution Sources (with graph)",
+  "subtitle": "Vind, geografi og forurensingskilder (med grafer)",
   "helpOnLoad": false,
   "aboutOnLoad": true,
   "about": [
@@ -139,7 +139,7 @@
       "property": "windSpeed",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the speed and direction of the wind."
+      "tooltip": "Forandre fart og vindretning."
     },
     {
       "id": "carsSlider",
@@ -147,7 +147,7 @@
       "min": 0,
       "max": 10,
       "steps": 10,
-      "title": "Cars",
+      "title": "Biler",
       "fillColor": "#D84748",
       "labels": [
         {
@@ -164,7 +164,7 @@
       "property": "numCars",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the number of cars."
+      "tooltip": "Forandre antall biler."
     },
     {
       "id": "factoriesSlider",
@@ -172,7 +172,7 @@
       "min": 0,
       "max": 5,
       "steps": 5,
-      "title": "Power Plants",
+      "title": "Kraftstasjoner",
       "fillColor": "#E67E22",
       "labels": [
         {
@@ -189,7 +189,7 @@
       "property": "numFactories",
       "retainProperty": true,
       "disabled": false,
-      "tooltip": "Change the number of power plants."
+      "tooltip": "Endre antall kraftstasjoner."
     },
     {
       "id": "playback",

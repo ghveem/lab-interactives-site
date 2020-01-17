@@ -1,7 +1,7 @@
 {
-  "title": "Water (master)",
+  "title": "Vann (master)",
   "publicationStatus": "public",
-  "subtitle": "Master Model",
+  "subtitle": "Vannmodell",
   "helpOnLoad": false,
   "aboutOnLoad": true,
   "about": [
@@ -14,10 +14,10 @@
     "Place your cursor at the land surface, and click to start drilling.",
     "Click and hold until the well reaches the proper depth.",
     "",
-    "The **Water Level** graph shows",
-    "the water level in the stream in the *Gaining Stream* and *Losing Stream* models.",
+    "The **Vann Level** graph shows",
+    "the Vann level in the stream in the *Gaining Stream* and *Losing Stream* models.",
     "",
-    "The **Well Output** graph shows the water output of different wells."
+    "The **Well Output** graph shows the Vann output of different wells."
   ],
  "credits": ["This [High-Adventure Science](http://has.concord.org \"High-Adventure Science\") interactive ",
               "was developed under a series of grants from the [National Science Foundation](http://nsf.gov \"National Science Foundation\") ",
@@ -141,7 +141,7 @@
       "xProperty": "year",
       "enableAxisScaling": false,
       "enableZooming": false,
-      "title": "Water Level",
+      "title": "Vannivå",
       "titlePosition": "left",
       "buttonsLayout": "horizontal",
       "buttonsStyle": "text",
