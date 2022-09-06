@@ -126,7 +126,7 @@ GEM
     tilt (2.0.10)
     travis-lint (1.7.0)
       hashr (~> 0.0.22)
-    tzinfo (0.3.59)
+    tzinfo (0.3.61)
     wdm (0.1.0)
 
 PLATFORMS
