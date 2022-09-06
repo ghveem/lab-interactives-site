@@ -4,7 +4,7 @@ gem "haml",               "~> 5.0.0"
 
 # Adds Hash.from_xml method used in Energy2D importer
 gem 'activesupport',     "~> 4"
-gem 'i18n',               "~> 0.6.8"
+gem 'i18n',               "~> 0.8.0"
 gem "s3_website",         "~> 3.1.0"
 
 group :app do
