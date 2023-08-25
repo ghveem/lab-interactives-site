@@ -3,8 +3,8 @@ source "http://rubygems.org"
 gem "haml",               "~> 5.0.0"
 
 # Adds Hash.from_xml method used in Energy2D importer
-gem 'activesupport',     "~> 6"
-gem 'i18n',               "~> 0.8.0"
+gem 'activesupport',     "~> 7"
+gem 'i18n',               "~> 1.14.1"
 gem "s3_website",         "~> 3.1.0"
 
 group :app do
